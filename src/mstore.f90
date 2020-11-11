@@ -14,6 +14,10 @@
 
 module mstore
    use mctc_io_structure, only : structure_type
+   use mstore_amino20x4, only : get_structure_amino20x4
+   use mstore_but14diol, only : get_structure_but14diol
+   use mstore_heavy28, only : get_structure_heavy28
+   use mstore_il16, only : get_structure_il16
    use mstore_mb16_43, only : get_structure_mb16_43
    use mstore_upu23, only : get_structure_upu23
    use mstore_x23, only : get_structure_x23
@@ -31,6 +35,10 @@ subroutine get_structure(self, set, id)
 
    select case(set)
    case default; error stop "Unknown set"
+   case("Amino20x4"); call get_structure_amino20x4(self, id)
+   case("But14diol"); call get_structure_but14diol(self, id)
+   case("Heavy28"); call get_structure_heavy28(self, id)
+   case("IL16"); call get_structure_il16(self, id)
    case("MB16-43"); call get_structure_mb16_43(self, id)
    case("UPU23"); call get_structure_upu23(self, id)
    case("X23"); call get_structure_x23(self, id)

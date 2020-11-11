@@ -26,6 +26,9 @@ subroutine write_fortran(mol, unit, name)
    do iat = 1, mol%nat
       write(unit, "(1x, '""', a, '""')", advance='no') trim(mol%sym(mol%id(iat)))
       if (iat /= mol%nat) write(unit, '(",")', advance='no')
+      if (modulo(iat, 14) == 0 .and. iat /= mol%nat) then
+         write(unit, '(1x, "&", /, 6x, "&")', advance="no")
+      end if
    end do
    write(unit, '("]")')
    write(unit, ffmt) "real(wp), parameter", "xyz(3, nat)", "reshape([&"
@@ -49,10 +52,10 @@ subroutine write_fortran(mol, unit, name)
       write(unit, '(6x, "&", 1x, a)') "shape(lattice))"
    end if
    if (abs(mol%charge) > epsilon(mol%charge)) then
-      write(unit, ffmt) "integer, parameter", "uhf", mol%uhf
+      write(unit, ffmt) "real(wp), parameter", "charge", nint(mol%charge)
    end if
    if (mol%uhf /= 0) then
-      write(unit, ffmt) "real(wp), parameter", "charge", nint(mol%charge)
+      write(unit, ffmt) "integer, parameter", "uhf", mol%uhf
    end if
    write(unit, '(3x, a, 1x, a)', advance='no') "call", "new(self, sym, xyz"
    if (has_lattice) then
@@ -88,6 +91,8 @@ program main
    integer, allocatable :: input_format
    type(structure_type) :: mol
    type(error_type), allocatable :: error
+   integer :: idx, unit, stat, tmp
+   logical :: exist
 
    call get_arguments(input, input_format, output, output_name, error)
    if (allocated(error)) then
@@ -104,6 +109,28 @@ program main
    if (allocated(error)) then
       write(error_unit, '(a)') error%message
       error stop
+   end if
+
+   idx = scan(input, '\/', back=.true.)
+   if (idx > 0) then
+      inquire(file=input(:idx)//".CHRG", exist=exist)
+      if (exist) then
+         open(file=input(:idx)//".CHRG", newunit=unit)
+         read(unit, *, iostat=stat) tmp
+         if (stat == 0) then
+            mol%charge = real(tmp, wp)
+         end if
+         close(unit)
+      end if
+      inquire(file=input(:idx)//".UHF", exist=exist)
+      if (exist) then
+         open(file=input(:idx)//".UHF", newunit=unit)
+         read(unit, *, iostat=stat) tmp
+         if (stat == 0) then
+            mol%uhf = tmp
+         end if
+         close(unit)
+      end if
    end if
 
    mol%sym = to_symbol(mol%num)
