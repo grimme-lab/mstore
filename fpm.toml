@@ -4,4 +4,4 @@ license = "Apache-2.0"
 
 [dependencies]
 [dependencies.mctc-lib]
-git = "git@github.com:grimme-lab/mctc-lib"
+git = "https://github.com/grimme-lab/mctc-lib"
