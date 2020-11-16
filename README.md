@@ -21,11 +21,31 @@ To compile the project run
 meson compile -C _build
 ```
 
-You can run the projects testsuite with
 
+## Example
+
+To use this project in your testsuite just invoke the ``get_structure`` routine of the ``mstore`` module:
+
+```fortran
+use mctc_io
+use mstore
+type(structure_type) :: mol
+
+call get_structure(mol, "MB16-43", "01")
 ```
-meson test -C _build --print-errorlogs
-```
+
+The ``get_structure`` routine loads a geometry, here *01*, of a  benchmark set, here *MB16-43*, into a ``structure_type``.
+Currently available benchmark sets are
+
+- *Amino20x4*
+- *But14diol*
+- *Heavy28*
+- *IL16*
+- *MB16-43*
+- *UPU23*
+- *X23*
+
+For the detailed record names of the benchmarks look up the respective benchmark entry.
 
 
 ## License
