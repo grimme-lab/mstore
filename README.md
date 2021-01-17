@@ -1,5 +1,8 @@
 # Molecular structure store for testing
 
+[![Apache-2.0](https://img.shields.io/github/license/grimme-lab/mstore)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/grimme-lab/mstore)](https://github.com/grimme-lab/mstore/releases/latest)
+
 
 ## Installation
 
