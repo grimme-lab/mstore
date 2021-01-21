@@ -79,9 +79,9 @@ end module fortranize
 program main
    use, intrinsic :: iso_fortran_env, only : output_unit, error_unit, input_unit
    use fortranize
-   use mctc_env
-   use mctc_io
-   use mctc_version
+   use mctc_env, only : error_type, fatal_error, wp
+   use mctc_io, only : read_structure, structure_type, filetype, get_filetype
+   use mctc_version, only : get_mctc_version
    use mctc_io_symbols, only : to_symbol
    use mstore
    implicit none
