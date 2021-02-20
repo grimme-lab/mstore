@@ -16,6 +16,7 @@ srcs += files(
   'amino20x4.f90',
   'but14diol.f90',
   'heavy28.f90',
+  'ice10.f90',
   'il16.f90',
   'mb16_43.f90',
   'upu23.f90',
