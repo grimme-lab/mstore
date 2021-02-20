@@ -21,10 +21,10 @@ module mstore_version
 
 
    !> String representation of the mstore version
-   character(len=*), parameter :: mstore_version_string = "0.1.0"
+   character(len=*), parameter :: mstore_version_string = "0.1.2"
 
    !> Numeric representation of the mstore version
-   integer, parameter :: mstore_version_compact(3) = [0, 1, 0]
+   integer, parameter :: mstore_version_compact(3) = [0, 1, 2]
 
 
 contains

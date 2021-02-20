@@ -17,6 +17,7 @@ module mstore
    use mstore_amino20x4, only : get_structure_amino20x4
    use mstore_but14diol, only : get_structure_but14diol
    use mstore_heavy28, only : get_structure_heavy28
+   use mstore_ice10, only : get_structure_ice10
    use mstore_il16, only : get_structure_il16
    use mstore_mb16_43, only : get_structure_mb16_43
    use mstore_upu23, only : get_structure_upu23
@@ -38,6 +39,7 @@ subroutine get_structure(self, set, id)
    case("Amino20x4"); call get_structure_amino20x4(self, id)
    case("But14diol"); call get_structure_but14diol(self, id)
    case("Heavy28"); call get_structure_heavy28(self, id)
+   case("ICE10"); call get_structure_ice10(self, id)
    case("IL16"); call get_structure_il16(self, id)
    case("MB16-43"); call get_structure_mb16_43(self, id)
    case("UPU23"); call get_structure_upu23(self, id)

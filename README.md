@@ -2,6 +2,7 @@
 
 [![Apache-2.0](https://img.shields.io/github/license/grimme-lab/mstore)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/grimme-lab/mstore)](https://github.com/grimme-lab/mstore/releases/latest)
+[![CI](https://github.com/grimme-lab/mstore/workflows/CI/badge.svg)](https://github.com/grimme-lab/mstore/actions)
 
 
 ## Installation
@@ -29,7 +30,7 @@ meson compile -C _build
 
 To use this project in your testsuite just invoke the ``get_structure`` routine of the ``mstore`` module:
 
-```fortran
+```f90
 use mctc_io
 use mstore
 type(structure_type) :: mol
@@ -43,6 +44,7 @@ Currently available benchmark sets are
 - *Amino20x4*
 - *But14diol*
 - *Heavy28*
+- *ICE10*
 - *IL16*
 - *MB16-43*
 - *UPU23*
