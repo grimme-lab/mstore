@@ -1,4 +1,5 @@
 # This file is part of mstore.
+# SPDX-Identifier: Apache-2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,14 +14,6 @@
 # limitations under the License.
 
 os = host_machine.system()
-
-if os == 'windows'
-  add_project_link_arguments(
-    '-Wl,--allow-multiple-definition',
-    language: 'fortran',
-  )
-endif
-
 fc = meson.get_compiler('fortran')
 fc_id = fc.get_id()
 

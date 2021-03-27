@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,45 +16,44 @@
 module mstore_x23
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_x23
+   public :: get_x23_records
 
 contains
 
-subroutine get_structure_x23(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_x23_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case("acetic");     call acetic(self)
-   case("adaman");     call adaman(self)
-   case("ammonia");    call ammonia(self)
-   case("anthracene"); call anthracene(self)
-   case("benzene");    call benzene(self)
-   case("CO2");        call CO2(self)
-   case("cyanamide");  call cyanamide(self)
-   case("cytosine");   call cytosine(self)
-   case("ethcar");     call ethcar(self)
-   case("formamide");  call formamide(self)
-   case("hexamine");   call hexamine(self)
-   case("hexdio");     call hexdio(self)
-   case("imdazole");   call imdazole(self)
-   case("naph");       call naph(self)
-   case("oxaca");      call oxaca(self)
-   case("oxacb");      call oxacb(self)
-   case("pyrazine");   call pyrazine(self)
-   case("pyrazole");   call pyrazole(self)
-   case("succinic");   call succinic(self)
-   case("triazine");   call triazine(self)
-   case("trioxane");   call trioxane(self)
-   case("uracil");     call uracil(self)
-   case("urea");       call urea(self)
-   end select
+   records = [ &
+      new_record("acetic", acetic), &
+      new_record("adaman", adaman), &
+      new_record("ammonia", ammonia), &
+      new_record("anthracene", anthracene), &
+      new_record("benzene", benzene), &
+      new_record("CO2", CO2), &
+      new_record("cyanamide", cyanamide), &
+      new_record("cytosine", cytosine), &
+      new_record("ethcar", ethcar), &
+      new_record("formamide", formamide), &
+      new_record("hexamine", hexamine), &
+      new_record("hexdio", hexdio), &
+      new_record("imdazole", imdazole), &
+      new_record("naph", naph), &
+      new_record("oxaca", oxaca), &
+      new_record("oxacb", oxacb), &
+      new_record("pyrazine", pyrazine), &
+      new_record("pyrazole", pyrazole), &
+      new_record("succinic", succinic), &
+      new_record("triazine", triazine), &
+      new_record("trioxane", trioxane), &
+      new_record("uracil", uracil), &
+      new_record("urea", urea) &
+      ]
 
-end subroutine get_structure_x23
+end subroutine get_x23_records
 
 subroutine acetic(self)
    type(structure_type), intent(out) :: self

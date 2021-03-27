@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,80 +16,79 @@
 module mstore_mb16_43
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_mb16_43
+   public :: get_mb16_43_records
 
 contains
 
-subroutine get_structure_mb16_43(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_mb16_43_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case('01');   call mindless01(self)
-   case('02');   call mindless02(self)
-   case('03');   call mindless03(self)
-   case('04');   call mindless04(self)
-   case('05');   call mindless05(self)
-   case('06');   call mindless06(self)
-   case('07');   call mindless07(self)
-   case('08');   call mindless08(self)
-   case('09');   call mindless09(self)
-   case('10');   call mindless10(self)
-   case('11');   call mindless11(self)
-   case('12');   call mindless12(self)
-   case('13');   call mindless13(self)
-   case('14');   call mindless14(self)
-   case('15');   call mindless15(self)
-   case('16');   call mindless16(self)
-   case('17');   call mindless17(self)
-   case('18');   call mindless18(self)
-   case('19');   call mindless19(self)
-   case('20');   call mindless20(self)
-   case('21');   call mindless21(self)
-   case('22');   call mindless22(self)
-   case('23');   call mindless23(self)
-   case('24');   call mindless24(self)
-   case('25');   call mindless25(self)
-   case('26');   call mindless26(self)
-   case('27');   call mindless27(self)
-   case('28');   call mindless28(self)
-   case('29');   call mindless29(self)
-   case('30');   call mindless30(self)
-   case('31');   call mindless31(self)
-   case('32');   call mindless32(self)
-   case('33');   call mindless33(self)
-   case('34');   call mindless34(self)
-   case('35');   call mindless35(self)
-   case('36');   call mindless36(self)
-   case('37');   call mindless37(self)
-   case('38');   call mindless38(self)
-   case('39');   call mindless39(self)
-   case('40');   call mindless40(self)
-   case('41');   call mindless41(self)
-   case('42');   call mindless42(self)
-   case('43');   call mindless43(self)
-   case('AlH3'); call AlH3(self)
-   case('BH3');  call BH3(self)
-   case('BeH2'); call BeH2(self)
-   case('CH4');  call CH4(self)
-   case('Cl2');  call Cl2(self)
-   case('F2');   call F2(self)
-   case('H2');   call H2(self)
-   case('LiH');  call LiH(self)
-   case('MgH2'); call MgH2(self)
-   case('N2');   call N2(self)
-   case('NaH');  call NaH(self)
-   case('O2');   call O2(self)
-   case('P2');   call P2(self)
-   case('S2');   call S2(self)
-   case('SiH4'); call SiH4(self)
-   end select
+   records = [ &
+      new_record('01', mindless01), &
+      new_record('02', mindless02), &
+      new_record('03', mindless03), &
+      new_record('04', mindless04), &
+      new_record('05', mindless05), &
+      new_record('06', mindless06), &
+      new_record('07', mindless07), &
+      new_record('08', mindless08), &
+      new_record('09', mindless09), &
+      new_record('10', mindless10), &
+      new_record('11', mindless11), &
+      new_record('12', mindless12), &
+      new_record('13', mindless13), &
+      new_record('14', mindless14), &
+      new_record('15', mindless15), &
+      new_record('16', mindless16), &
+      new_record('17', mindless17), &
+      new_record('18', mindless18), &
+      new_record('19', mindless19), &
+      new_record('20', mindless20), &
+      new_record('21', mindless21), &
+      new_record('22', mindless22), &
+      new_record('23', mindless23), &
+      new_record('24', mindless24), &
+      new_record('25', mindless25), &
+      new_record('26', mindless26), &
+      new_record('27', mindless27), &
+      new_record('28', mindless28), &
+      new_record('29', mindless29), &
+      new_record('30', mindless30), &
+      new_record('31', mindless31), &
+      new_record('32', mindless32), &
+      new_record('33', mindless33), &
+      new_record('34', mindless34), &
+      new_record('35', mindless35), &
+      new_record('36', mindless36), &
+      new_record('37', mindless37), &
+      new_record('38', mindless38), &
+      new_record('39', mindless39), &
+      new_record('40', mindless40), &
+      new_record('41', mindless41), &
+      new_record('42', mindless42), &
+      new_record('43', mindless43), &
+      new_record('AlH3', AlH3), &
+      new_record('BH3', BH3), &
+      new_record('BeH2', BeH2), &
+      new_record('CH4', CH4), &
+      new_record('Cl2', Cl2), &
+      new_record('F2', F2), &
+      new_record('H2', H2), &
+      new_record('LiH', LiH), &
+      new_record('MgH2', MgH2), &
+      new_record('N2', N2), &
+      new_record('NaH', NaH), &
+      new_record('O2', O2), &
+      new_record('P2', P2), &
+      new_record('S2', S2), &
+      new_record('SiH4', SiH4) &
+      ]
 
-end subroutine get_structure_mb16_43
+end subroutine get_mb16_43_records
 
 subroutine mindless01(self)
    type(structure_type), intent(out) :: self

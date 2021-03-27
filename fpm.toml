@@ -1,5 +1,5 @@
 name = "mstore"
-version = "0.1.0"
+version = "0.2.0"
 license = "Apache-2.0"
 maintainer = ["@awvwgk"]
 author = ["Sebastian Ehlert"]
@@ -10,3 +10,11 @@ keywords = ["computational-chemistry", "testing"]
 [dependencies]
 [dependencies.mctc-lib]
 git = "https://github.com/grimme-lab/mctc-lib"
+
+[[executable]]
+name = "mstore-fortranize"
+source-dir = "app/fortranize"
+
+[[executable]]
+name = "mstore-info"
+source-dir = "app/info"

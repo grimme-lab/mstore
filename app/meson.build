@@ -1,4 +1,5 @@
 # This file is part of mstore.
+# SPDX-Identifier: Apache-2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-mstore_fortranize_exe = executable(
-  'mstore-fortranize',
-  sources: files('main.f90'),
-  dependencies: mstore_dep,
-  install: false,
-)
+subdir('fortranize')
+subdir('info')

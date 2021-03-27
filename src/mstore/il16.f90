@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,70 +16,69 @@
 module mstore_il16
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_il16
+   public :: get_il16_records
 
 contains
 
-subroutine get_structure_il16(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_il16_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case("008");  call il008(self)
-   case("008A"); call il008A(self)
-   case("008B"); call il008B(self)
-   case("144");  call il144(self)
-   case("144A"); call il144A(self)
-   case("144B"); call il144B(self)
-   case("147");  call il147(self)
-   case("147A"); call il147A(self)
-   case("147B"); call il147B(self)
-   case("148");  call il148(self)
-   case("148A"); call il148A(self)
-   case("148B"); call il148B(self)
-   case("150");  call il150(self)
-   case("150A"); call il150A(self)
-   case("150B"); call il150B(self)
-   case("152");  call il152(self)
-   case("152A"); call il152A(self)
-   case("152B"); call il152B(self)
-   case("187");  call il187(self)
-   case("187A"); call il187A(self)
-   case("187B"); call il187B(self)
-   case("202");  call il202(self)
-   case("202A"); call il202A(self)
-   case("202B"); call il202B(self)
-   case("212");  call il212(self)
-   case("212A"); call il212A(self)
-   case("212B"); call il212B(self)
-   case("213");  call il213(self)
-   case("213A"); call il213A(self)
-   case("213B"); call il213B(self)
-   case("214");  call il214(self)
-   case("214A"); call il214A(self)
-   case("214B"); call il214B(self)
-   case("227");  call il227(self)
-   case("227A"); call il227A(self)
-   case("227B"); call il227B(self)
-   case("228");  call il228(self)
-   case("228A"); call il228A(self)
-   case("228B"); call il228B(self)
-   case("229");  call il229(self)
-   case("229A"); call il229A(self)
-   case("229B"); call il229B(self)
-   case("230");  call il230(self)
-   case("230A"); call il230A(self)
-   case("230B"); call il230B(self)
-   case("231");  call il231(self)
-   case("231A"); call il231A(self)
-   case("231B"); call il231B(self)
-   end select
+   records = [ &
+      new_record("008", il008), &
+      new_record("008A", il008A), &
+      new_record("008B", il008B), &
+      new_record("144", il144), &
+      new_record("144A", il144A), &
+      new_record("144B", il144B), &
+      new_record("147", il147), &
+      new_record("147A", il147A), &
+      new_record("147B", il147B), &
+      new_record("148", il148), &
+      new_record("148A", il148A), &
+      new_record("148B", il148B), &
+      new_record("150", il150), &
+      new_record("150A", il150A), &
+      new_record("150B", il150B), &
+      new_record("152", il152), &
+      new_record("152A", il152A), &
+      new_record("152B", il152B), &
+      new_record("187", il187), &
+      new_record("187A", il187A), &
+      new_record("187B", il187B), &
+      new_record("202", il202), &
+      new_record("202A", il202A), &
+      new_record("202B", il202B), &
+      new_record("212", il212), &
+      new_record("212A", il212A), &
+      new_record("212B", il212B), &
+      new_record("213", il213), &
+      new_record("213A", il213A), &
+      new_record("213B", il213B), &
+      new_record("214", il214), &
+      new_record("214A", il214A), &
+      new_record("214B", il214B), &
+      new_record("227", il227), &
+      new_record("227A", il227A), &
+      new_record("227B", il227B), &
+      new_record("228", il228), &
+      new_record("228A", il228A), &
+      new_record("228B", il228B), &
+      new_record("229", il229), &
+      new_record("229A", il229A), &
+      new_record("229B", il229B), &
+      new_record("230", il230), &
+      new_record("230A", il230A), &
+      new_record("230B", il230B), &
+      new_record("231", il231), &
+      new_record("231A", il231A), &
+      new_record("231B", il231B) &
+      ]
 
-end subroutine get_structure_il16
+end subroutine get_il16_records
 
 subroutine il008(self)
    type(structure_type), intent(out) :: self

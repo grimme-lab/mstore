@@ -1,5 +1,4 @@
 # This file is part of mstore.
-# SPDX-Identifier: Apache-2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,15 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-subdir('data')
-
 srcs += files(
-  'amino20x4.f90',
-  'but14diol.f90',
-  'heavy28.f90',
-  'ice10.f90',
-  'il16.f90',
-  'mb16_43.f90',
-  'upu23.f90',
-  'x23.f90',
+  'collection.f90',
+  'record.f90',
+  'store.f90',
 )
