@@ -37,6 +37,11 @@ elif fc_id == 'pgi'
   )
 endif
 
+if get_option('openmp')
+  omp_dep = dependency('openmp')
+  lib_deps += omp_dep
+endif
+
 # Create the tool chain library as subproject
 mctc_prj = subproject(
   'mctc-lib',
