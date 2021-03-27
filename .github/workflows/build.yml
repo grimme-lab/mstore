@@ -88,6 +88,7 @@ jobs:
       run: meson setup ${{ env.BUILD_DIR }}
       env:
         FC: gfortran
+        LDFLAGS: -Wl,--allow-multiple-definition
 
     - name: Build project (meson)
       run: meson compile -C ${{ env.BUILD_DIR }}
