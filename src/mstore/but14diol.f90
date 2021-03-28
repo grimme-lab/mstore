@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,87 +16,86 @@
 module mstore_but14diol
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_but14diol
+   public :: get_but14diol_records
 
 contains
 
-subroutine get_structure_but14diol(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_but14diol_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case("1");  call b1(self)
-   case("2");  call b2(self)
-   case("3");  call b3(self)
-   case("4");  call b4(self)
-   case("5");  call b5(self)
-   case("6");  call b6(self)
-   case("7");  call b7(self)
-   case("8");  call b8(self)
-   case("9");  call b9(self)
-   case("10"); call b10(self)
-   case("11"); call b11(self)
-   case("12"); call b12(self)
-   case("13"); call b13(self)
-   case("14"); call b14(self)
-   case("15"); call b15(self)
-   case("16"); call b16(self)
-   case("17"); call b17(self)
-   case("18"); call b18(self)
-   case("19"); call b19(self)
-   case("20"); call b20(self)
-   case("21"); call b21(self)
-   case("22"); call b22(self)
-   case("23"); call b23(self)
-   case("24"); call b24(self)
-   case("25"); call b25(self)
-   case("26"); call b26(self)
-   case("27"); call b27(self)
-   case("28"); call b28(self)
-   case("29"); call b29(self)
-   case("30"); call b30(self)
-   case("31"); call b31(self)
-   case("32"); call b32(self)
-   case("33"); call b33(self)
-   case("34"); call b34(self)
-   case("35"); call b35(self)
-   case("36"); call b36(self)
-   case("37"); call b37(self)
-   case("38"); call b38(self)
-   case("39"); call b39(self)
-   case("40"); call b40(self)
-   case("41"); call b41(self)
-   case("42"); call b42(self)
-   case("43"); call b43(self)
-   case("44"); call b44(self)
-   case("45"); call b45(self)
-   case("46"); call b46(self)
-   case("47"); call b47(self)
-   case("48"); call b48(self)
-   case("49"); call b49(self)
-   case("50"); call b50(self)
-   case("51"); call b51(self)
-   case("52"); call b52(self)
-   case("53"); call b53(self)
-   case("54"); call b54(self)
-   case("55"); call b55(self)
-   case("56"); call b56(self)
-   case("57"); call b57(self)
-   case("58"); call b58(self)
-   case("59"); call b59(self)
-   case("60"); call b60(self)
-   case("61"); call b61(self)
-   case("62"); call b62(self)
-   case("63"); call b63(self)
-   case("64"); call b64(self)
-   case("65"); call b65(self)
-   end select
+   records = [ &
+      new_record("1", b1), &
+      new_record("2", b2), &
+      new_record("3", b3), &
+      new_record("4", b4), &
+      new_record("5", b5), &
+      new_record("6", b6), &
+      new_record("7", b7), &
+      new_record("8", b8), &
+      new_record("9", b9), &
+      new_record("10", b10), &
+      new_record("11", b11), &
+      new_record("12", b12), &
+      new_record("13", b13), &
+      new_record("14", b14), &
+      new_record("15", b15), &
+      new_record("16", b16), &
+      new_record("17", b17), &
+      new_record("18", b18), &
+      new_record("19", b19), &
+      new_record("20", b20), &
+      new_record("21", b21), &
+      new_record("22", b22), &
+      new_record("23", b23), &
+      new_record("24", b24), &
+      new_record("25", b25), &
+      new_record("26", b26), &
+      new_record("27", b27), &
+      new_record("28", b28), &
+      new_record("29", b29), &
+      new_record("30", b30), &
+      new_record("31", b31), &
+      new_record("32", b32), &
+      new_record("33", b33), &
+      new_record("34", b34), &
+      new_record("35", b35), &
+      new_record("36", b36), &
+      new_record("37", b37), &
+      new_record("38", b38), &
+      new_record("39", b39), &
+      new_record("40", b40), &
+      new_record("41", b41), &
+      new_record("42", b42), &
+      new_record("43", b43), &
+      new_record("44", b44), &
+      new_record("45", b45), &
+      new_record("46", b46), &
+      new_record("47", b47), &
+      new_record("48", b48), &
+      new_record("49", b49), &
+      new_record("50", b50), &
+      new_record("51", b51), &
+      new_record("52", b52), &
+      new_record("53", b53), &
+      new_record("54", b54), &
+      new_record("55", b55), &
+      new_record("56", b56), &
+      new_record("57", b57), &
+      new_record("58", b58), &
+      new_record("59", b59), &
+      new_record("60", b60), &
+      new_record("61", b61), &
+      new_record("62", b62), &
+      new_record("63", b63), &
+      new_record("64", b64), &
+      new_record("65", b65) &
+      ]
 
-end subroutine get_structure_but14diol
+end subroutine get_but14diol_records
 
 subroutine b1(self)
    type(structure_type), intent(out) :: self

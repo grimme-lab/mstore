@@ -1,3 +1,18 @@
+! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
+!
+! Licensed under the Apache License, Version 2.0 (the "License");
+! you may not use this file except in compliance with the License.
+! You may obtain a copy of the License at
+!
+!     http://www.apache.org/licenses/LICENSE-2.0
+!
+! Unless required by applicable law or agreed to in writing, software
+! distributed under the License is distributed on an "AS IS" BASIS,
+! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+! See the License for the specific language governing permissions and
+! limitations under the License.
+
 module fortranize
    use mctc_io_structure, only : structure_type
    implicit none
@@ -76,7 +91,7 @@ end subroutine write_fortran
 
 end module fortranize
 
-program main
+program main_fortranize
    use, intrinsic :: iso_fortran_env, only : output_unit, error_unit, input_unit
    use fortranize
    use mctc_env, only : error_type, fatal_error, wp
@@ -85,7 +100,7 @@ program main
    use mctc_io_symbols, only : to_symbol
    use mstore
    implicit none
-   character(len=*), parameter :: prog_name = "mctc-fortranize"
+   character(len=*), parameter :: prog_name = "mstore-fortranize"
 
    character(len=:), allocatable :: input, output, output_name
    integer, allocatable :: input_format
@@ -284,4 +299,4 @@ subroutine get_arguments(input, input_format, output, output_name, &
 end subroutine get_arguments
 
 
-end program main
+end program main_fortranize

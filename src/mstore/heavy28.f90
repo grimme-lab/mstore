@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,60 +16,59 @@
 module mstore_heavy28
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_heavy28
+   public :: get_heavy28_records
 
 contains
 
-subroutine get_structure_heavy28(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_heavy28_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case("bih3");      call bih3(self)
-   case("bih3_2");    call bih3_2(self)
-   case("bih3_h2o");  call bih3_h2o(self)
-   case("bih3_h2s");  call bih3_h2s(self)
-   case("bih3_hbr");  call bih3_hbr(self)
-   case("bih3_hcl");  call bih3_hcl(self)
-   case("bih3_hi");   call bih3_hi(self)
-   case("bih3_nh3");  call bih3_nh3(self)
-   case("h2o");       call h2o(self)
-   case("h2s");       call h2s(self)
-   case("hbr");       call hbr(self)
-   case("hcl");       call hcl(self)
-   case("hi");        call hi(self)
-   case("nh3");       call nh3(self)
-   case("pbh4");      call pbh4(self)
-   case("pbh4_2");    call pbh4_2(self)
-   case("pbh4_bih3"); call pbh4_bih3(self)
-   case("pbh4_h2o");  call pbh4_h2o(self)
-   case("pbh4_hbr");  call pbh4_hbr(self)
-   case("pbh4_hcl");  call pbh4_hcl(self)
-   case("pbh4_hi");   call pbh4_hi(self)
-   case("pbh4_teh2"); call pbh4_teh2(self)
-   case("sbh3");      call sbh3(self)
-   case("sbh3_2");    call sbh3_2(self)
-   case("sbh3_h2o");  call sbh3_h2o(self)
-   case("sbh3_h2s");  call sbh3_h2s(self)
-   case("sbh3_hbr");  call sbh3_hbr(self)
-   case("sbh3_hcl");  call sbh3_hcl(self)
-   case("sbh3_hi");   call sbh3_hi(self)
-   case("sbh3_nh3");  call sbh3_nh3(self)
-   case("teh2");      call teh2(self)
-   case("teh2_2");    call teh2_2(self)
-   case("teh2_h2o");  call teh2_h2o(self)
-   case("teh2_h2s");  call teh2_h2s(self)
-   case("teh2_hbr");  call teh2_hbr(self)
-   case("teh2_hcl");  call teh2_hcl(self)
-   case("teh2_hi");   call teh2_hi(self)
-   case("teh2_nh3");  call teh2_nh3(self)
-   end select
+   records = [ &
+      new_record("bih3", bih3), &
+      new_record("bih3_2", bih3_2), &
+      new_record("bih3_h2o", bih3_h2o), &
+      new_record("bih3_h2s", bih3_h2s), &
+      new_record("bih3_hbr", bih3_hbr), &
+      new_record("bih3_hcl", bih3_hcl), &
+      new_record("bih3_hi", bih3_hi), &
+      new_record("bih3_nh3", bih3_nh3), &
+      new_record("h2o", h2o), &
+      new_record("h2s", h2s), &
+      new_record("hbr", hbr), &
+      new_record("hcl", hcl), &
+      new_record("hi", hi), &
+      new_record("nh3", nh3), &
+      new_record("pbh4", pbh4), &
+      new_record("pbh4_2", pbh4_2), &
+      new_record("pbh4_bih3", pbh4_bih3), &
+      new_record("pbh4_h2o", pbh4_h2o), &
+      new_record("pbh4_hbr", pbh4_hbr), &
+      new_record("pbh4_hcl", pbh4_hcl), &
+      new_record("pbh4_hi", pbh4_hi), &
+      new_record("pbh4_teh2", pbh4_teh2), &
+      new_record("sbh3", sbh3), &
+      new_record("sbh3_2", sbh3_2), &
+      new_record("sbh3_h2o", sbh3_h2o), &
+      new_record("sbh3_h2s", sbh3_h2s), &
+      new_record("sbh3_hbr", sbh3_hbr), &
+      new_record("sbh3_hcl", sbh3_hcl), &
+      new_record("sbh3_hi", sbh3_hi), &
+      new_record("sbh3_nh3", sbh3_nh3), &
+      new_record("teh2", teh2), &
+      new_record("teh2_2", teh2_2), &
+      new_record("teh2_h2o", teh2_h2o), &
+      new_record("teh2_h2s", teh2_h2s), &
+      new_record("teh2_hbr", teh2_hbr), &
+      new_record("teh2_hcl", teh2_hcl), &
+      new_record("teh2_hi", teh2_hi), &
+      new_record("teh2_nh3", teh2_nh3) &
+      ]
 
-end subroutine get_structure_heavy28
+end subroutine get_heavy28_records
 
 subroutine bih3(self)
    type(structure_type), intent(out) :: self

@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,122 +16,121 @@
 module mstore_amino20x4
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_amino20x4
+   public :: get_amino20x4_records
 
 contains
 
-subroutine get_structure_amino20x4(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_amino20x4_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case("ALA_xab"); call ALA_xab(self)
-   case("ALA_xac"); call ALA_xac(self)
-   case("ALA_xag"); call ALA_xag(self)
-   case("ALA_xai"); call ALA_xai(self)
-   case("ALA_xak"); call ALA_xak(self)
-   case("ARG_xak"); call ARG_xak(self)
-   case("ARG_xbv"); call ARG_xbv(self)
-   case("ARG_xbx"); call ARG_xbx(self)
-   case("ARG_xby"); call ARG_xby(self)
-   case("ARG_xci"); call ARG_xci(self)
-   case("ASN_xab"); call ASN_xab(self)
-   case("ASN_xae"); call ASN_xae(self)
-   case("ASN_xaf"); call ASN_xaf(self)
-   case("ASN_xah"); call ASN_xah(self)
-   case("ASN_xaj"); call ASN_xaj(self)
-   case("ASP_xad"); call ASP_xad(self)
-   case("ASP_xau"); call ASP_xau(self)
-   case("ASP_xay"); call ASP_xay(self)
-   case("ASP_xaz"); call ASP_xaz(self)
-   case("ASP_xbc"); call ASP_xbc(self)
-   case("CYS_xag"); call CYS_xag(self)
-   case("CYS_xah"); call CYS_xah(self)
-   case("CYS_xai"); call CYS_xai(self)
-   case("CYS_xal"); call CYS_xal(self)
-   case("CYS_xao"); call CYS_xao(self)
-   case("GLN_xai"); call GLN_xai(self)
-   case("GLN_xal"); call GLN_xal(self)
-   case("GLN_xan"); call GLN_xan(self)
-   case("GLN_xap"); call GLN_xap(self)
-   case("GLN_xat"); call GLN_xat(self)
-   case("GLU_xad"); call GLU_xad(self)
-   case("GLU_xal"); call GLU_xal(self)
-   case("GLU_xar"); call GLU_xar(self)
-   case("GLU_xav"); call GLU_xav(self)
-   case("GLU_xbi"); call GLU_xbi(self)
-   case("GLY_xab"); call GLY_xab(self)
-   case("GLY_xac"); call GLY_xac(self)
-   case("GLY_xad"); call GLY_xad(self)
-   case("GLY_xae"); call GLY_xae(self)
-   case("GLY_xag"); call GLY_xag(self)
-   case("HIS_xah"); call HIS_xah(self)
-   case("HIS_xam"); call HIS_xam(self)
-   case("HIS_xaq"); call HIS_xaq(self)
-   case("HIS_xau"); call HIS_xau(self)
-   case("HIS_xav"); call HIS_xav(self)
-   case("ILE_xae"); call ILE_xae(self)
-   case("ILE_xag"); call ILE_xag(self)
-   case("ILE_xaj"); call ILE_xaj(self)
-   case("ILE_xak"); call ILE_xak(self)
-   case("ILE_xaq"); call ILE_xaq(self)
-   case("LEU_xad"); call LEU_xad(self)
-   case("LEU_xae"); call LEU_xae(self)
-   case("LEU_xap"); call LEU_xap(self)
-   case("LEU_xaq"); call LEU_xaq(self)
-   case("LEU_xbb"); call LEU_xbb(self)
-   case("LYS_xan"); call LYS_xan(self)
-   case("LYS_xao"); call LYS_xao(self)
-   case("LYS_xap"); call LYS_xap(self)
-   case("LYS_xas"); call LYS_xas(self)
-   case("LYS_xat"); call LYS_xat(self)
-   case("MET_xag"); call MET_xag(self)
-   case("MET_xav"); call MET_xav(self)
-   case("MET_xbf"); call MET_xbf(self)
-   case("MET_xbm"); call MET_xbm(self)
-   case("MET_xbo"); call MET_xbo(self)
-   case("PHE_xab"); call PHE_xab(self)
-   case("PHE_xal"); call PHE_xal(self)
-   case("PHE_xan"); call PHE_xan(self)
-   case("PHE_xar"); call PHE_xar(self)
-   case("PHE_xaw"); call PHE_xaw(self)
-   case("PRO_xab"); call PRO_xab(self)
-   case("PRO_xac"); call PRO_xac(self)
-   case("PRO_xad"); call PRO_xad(self)
-   case("PRO_xae"); call PRO_xae(self)
-   case("PRO_xaf"); call PRO_xaf(self)
-   case("SER_xad"); call SER_xad(self)
-   case("SER_xaf"); call SER_xaf(self)
-   case("SER_xah"); call SER_xah(self)
-   case("SER_xak"); call SER_xak(self)
-   case("SER_xar"); call SER_xar(self)
-   case("THR_xab"); call THR_xab(self)
-   case("THR_xag"); call THR_xag(self)
-   case("THR_xah"); call THR_xah(self)
-   case("THR_xal"); call THR_xal(self)
-   case("THR_xaq"); call THR_xaq(self)
-   case("TRP_xac"); call TRP_xac(self)
-   case("TRP_xaf"); call TRP_xaf(self)
-   case("TRP_xag"); call TRP_xag(self)
-   case("TRP_xah"); call TRP_xah(self)
-   case("TRP_xao"); call TRP_xao(self)
-   case("TYR_xab"); call TYR_xab(self)
-   case("TYR_xag"); call TYR_xag(self)
-   case("TYR_xah"); call TYR_xah(self)
-   case("TYR_xan"); call TYR_xan(self)
-   case("TYR_xar"); call TYR_xar(self)
-   case("VAL_xad"); call VAL_xad(self)
-   case("VAL_xaf"); call VAL_xaf(self)
-   case("VAL_xah"); call VAL_xah(self)
-   case("VAL_xaj"); call VAL_xaj(self)
-   case("VAL_xak"); call VAL_xak(self)
-   end select
+   records = [ &
+      new_record("ALA_xab", ALA_xab), &
+      new_record("ALA_xac", ALA_xac), &
+      new_record("ALA_xag", ALA_xag), &
+      new_record("ALA_xai", ALA_xai), &
+      new_record("ALA_xak", ALA_xak), &
+      new_record("ARG_xak", ARG_xak), &
+      new_record("ARG_xbv", ARG_xbv), &
+      new_record("ARG_xbx", ARG_xbx), &
+      new_record("ARG_xby", ARG_xby), &
+      new_record("ARG_xci", ARG_xci), &
+      new_record("ASN_xab", ASN_xab), &
+      new_record("ASN_xae", ASN_xae), &
+      new_record("ASN_xaf", ASN_xaf), &
+      new_record("ASN_xah", ASN_xah), &
+      new_record("ASN_xaj", ASN_xaj), &
+      new_record("ASP_xad", ASP_xad), &
+      new_record("ASP_xau", ASP_xau), &
+      new_record("ASP_xay", ASP_xay), &
+      new_record("ASP_xaz", ASP_xaz), &
+      new_record("ASP_xbc", ASP_xbc), &
+      new_record("CYS_xag", CYS_xag), &
+      new_record("CYS_xah", CYS_xah), &
+      new_record("CYS_xai", CYS_xai), &
+      new_record("CYS_xal", CYS_xal), &
+      new_record("CYS_xao", CYS_xao), &
+      new_record("GLN_xai", GLN_xai), &
+      new_record("GLN_xal", GLN_xal), &
+      new_record("GLN_xan", GLN_xan), &
+      new_record("GLN_xap", GLN_xap), &
+      new_record("GLN_xat", GLN_xat), &
+      new_record("GLU_xad", GLU_xad), &
+      new_record("GLU_xal", GLU_xal), &
+      new_record("GLU_xar", GLU_xar), &
+      new_record("GLU_xav", GLU_xav), &
+      new_record("GLU_xbi", GLU_xbi), &
+      new_record("GLY_xab", GLY_xab), &
+      new_record("GLY_xac", GLY_xac), &
+      new_record("GLY_xad", GLY_xad), &
+      new_record("GLY_xae", GLY_xae), &
+      new_record("GLY_xag", GLY_xag), &
+      new_record("HIS_xah", HIS_xah), &
+      new_record("HIS_xam", HIS_xam), &
+      new_record("HIS_xaq", HIS_xaq), &
+      new_record("HIS_xau", HIS_xau), &
+      new_record("HIS_xav", HIS_xav), &
+      new_record("ILE_xae", ILE_xae), &
+      new_record("ILE_xag", ILE_xag), &
+      new_record("ILE_xaj", ILE_xaj), &
+      new_record("ILE_xak", ILE_xak), &
+      new_record("ILE_xaq", ILE_xaq), &
+      new_record("LEU_xad", LEU_xad), &
+      new_record("LEU_xae", LEU_xae), &
+      new_record("LEU_xap", LEU_xap), &
+      new_record("LEU_xaq", LEU_xaq), &
+      new_record("LEU_xbb", LEU_xbb), &
+      new_record("LYS_xan", LYS_xan), &
+      new_record("LYS_xao", LYS_xao), &
+      new_record("LYS_xap", LYS_xap), &
+      new_record("LYS_xas", LYS_xas), &
+      new_record("LYS_xat", LYS_xat), &
+      new_record("MET_xag", MET_xag), &
+      new_record("MET_xav", MET_xav), &
+      new_record("MET_xbf", MET_xbf), &
+      new_record("MET_xbm", MET_xbm), &
+      new_record("MET_xbo", MET_xbo), &
+      new_record("PHE_xab", PHE_xab), &
+      new_record("PHE_xal", PHE_xal), &
+      new_record("PHE_xan", PHE_xan), &
+      new_record("PHE_xar", PHE_xar), &
+      new_record("PHE_xaw", PHE_xaw), &
+      new_record("PRO_xab", PRO_xab), &
+      new_record("PRO_xac", PRO_xac), &
+      new_record("PRO_xad", PRO_xad), &
+      new_record("PRO_xae", PRO_xae), &
+      new_record("PRO_xaf", PRO_xaf), &
+      new_record("SER_xad", SER_xad), &
+      new_record("SER_xaf", SER_xaf), &
+      new_record("SER_xah", SER_xah), &
+      new_record("SER_xak", SER_xak), &
+      new_record("SER_xar", SER_xar), &
+      new_record("THR_xab", THR_xab), &
+      new_record("THR_xag", THR_xag), &
+      new_record("THR_xah", THR_xah), &
+      new_record("THR_xal", THR_xal), &
+      new_record("THR_xaq", THR_xaq), &
+      new_record("TRP_xac", TRP_xac), &
+      new_record("TRP_xaf", TRP_xaf), &
+      new_record("TRP_xag", TRP_xag), &
+      new_record("TRP_xah", TRP_xah), &
+      new_record("TRP_xao", TRP_xao), &
+      new_record("TYR_xab", TYR_xab), &
+      new_record("TYR_xag", TYR_xag), &
+      new_record("TYR_xah", TYR_xah), &
+      new_record("TYR_xan", TYR_xan), &
+      new_record("TYR_xar", TYR_xar), &
+      new_record("VAL_xad", VAL_xad), &
+      new_record("VAL_xaf", VAL_xaf), &
+      new_record("VAL_xah", VAL_xah), &
+      new_record("VAL_xaj", VAL_xaj), &
+      new_record("VAL_xak", VAL_xak) &
+      ]
 
-end subroutine get_structure_amino20x4
+end subroutine get_amino20x4_records
 
 subroutine ALA_xab(self)
    type(structure_type), intent(out) :: self

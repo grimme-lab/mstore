@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,46 +16,45 @@
 module mstore_upu23
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_upu23
+   public :: get_upu23_records
 
 contains
 
-subroutine get_structure_upu23(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_upu23_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case('0a'); call upu0a(self)
-   case('0b'); call upu0b(self)
-   case('1a'); call upu1a(self)
-   case('1b'); call upu1b(self)
-   case('1c'); call upu1c(self)
-   case('1e'); call upu1e(self)
-   case('1f'); call upu1f(self)
-   case('1g'); call upu1g(self)
-   case('1m'); call upu1m(self)
-   case('1p'); call upu1p(self)
-   case('2a'); call upu2a(self)
-   case('2h'); call upu2h(self)
-   case('2p'); call upu2p(self)
-   case('3a'); call upu3a(self)
-   case('3b'); call upu3b(self)
-   case('3d'); call upu3d(self)
-   case('4b'); call upu4b(self)
-   case('5z'); call upu5z(self)
-   case('6p'); call upu6p(self)
-   case('7a'); call upu7a(self)
-   case('7p'); call upu7p(self)
-   case('8d'); call upu8d(self)
-   case('9a'); call upu9a(self)
-   case('aa'); call upuaa(self)
-   end select
+   records = [ &
+      new_record('0a', upu0a), &
+      new_record('0b', upu0b), &
+      new_record('1a', upu1a), &
+      new_record('1b', upu1b), &
+      new_record('1c', upu1c), &
+      new_record('1e', upu1e), &
+      new_record('1f', upu1f), &
+      new_record('1g', upu1g), &
+      new_record('1m', upu1m), &
+      new_record('1p', upu1p), &
+      new_record('2a', upu2a), &
+      new_record('2h', upu2h), &
+      new_record('2p', upu2p), &
+      new_record('3a', upu3a), &
+      new_record('3b', upu3b), &
+      new_record('3d', upu3d), &
+      new_record('4b', upu4b), &
+      new_record('5z', upu5z), &
+      new_record('6p', upu6p), &
+      new_record('7a', upu7a), &
+      new_record('7p', upu7p), &
+      new_record('8d', upu8d), &
+      new_record('9a', upu9a), &
+      new_record('aa', upuaa) &
+      ]
 
-end subroutine get_structure_upu23
+end subroutine get_upu23_records
 
 subroutine upu0a(self)
    type(structure_type), intent(out) :: self

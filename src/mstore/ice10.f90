@@ -1,4 +1,5 @@
 ! This file is part of mstore.
+! SPDX-Identifier: Apache-2.0
 !
 ! Licensed under the Apache License, Version 2.0 (the "License");
 ! you may not use this file except in compliance with the License.
@@ -15,33 +16,32 @@
 module mstore_ice10
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
+   use mstore_data_record, only : record_type, new_record, select_record
    implicit none
    private
 
-   public :: get_structure_ice10
+   public :: get_ice10_records
 
 contains
 
-subroutine get_structure_ice10(self, name)
-   type(structure_type), intent(out) :: self
-   character(len=*), intent(in) :: name
+subroutine get_ice10_records(records)
+   type(record_type), allocatable, intent(out) :: records(:)
 
-   select case(name)
-   case default; error stop "Unknown identifier"
-   case("gas");  call gas(self)
-   case("ih");   call ih(self)
-   case("ii");   call ii(self)
-   case("iii");  call iii(self)
-   case("ix");   call ix(self)
-   case("vi");   call vi(self)
-   case("vii");  call vii(self)
-   case("viii"); call viii(self)
-   case("xii");  call xii(self)
-   case("xiv");  call xiv(self)
-   case("xv");   call xv(self)
-   end select
+   records = [ &
+      new_record("gas", gas), &
+      new_record("ih", ih), &
+      new_record("ii", ii), &
+      new_record("iii", iii), &
+      new_record("ix", ix), &
+      new_record("vi", vi), &
+      new_record("vii", vii), &
+      new_record("viii", viii), &
+      new_record("xii", xii), &
+      new_record("xiv", xiv), &
+      new_record("xv", xv) &
+      ]
 
-end subroutine get_structure_ice10
+end subroutine get_ice10_records
 
 subroutine gas(self)
    type(structure_type), intent(out) :: self
