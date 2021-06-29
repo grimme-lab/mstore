@@ -26,12 +26,15 @@ project(
 # Follow GNU conventions for installing directories
 include(GNUInstallDirs)
 
-# Collect subprojects
-set(lib-deps)
-add_subdirectory("subprojects" EXCLUDE_FROM_ALL)
-
 # General configuration information
 add_subdirectory("config")
+
+# Collect subprojects
+set(lib-deps)
+if(NOT TARGET "mctc-lib::mctc-lib")
+  find_package("mctc-lib" REQUIRED)
+endif()
+list(APPEND lib-deps "mctc-lib::mctc-lib")
 
 # Collect source of the project
 set(srcs)

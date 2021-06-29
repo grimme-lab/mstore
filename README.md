@@ -45,7 +45,7 @@ revision = head
 You can retrieve the dependency from the wrap fallback with
 
 ```meson
-mstore_dep = dependency('mstore', ['mstore', 'mstore_dep'])
+mstore_dep = dependency('mstore', fallback: ['mstore', 'mstore_dep'])
 ```
 
 and add it as dependency to your targets.
