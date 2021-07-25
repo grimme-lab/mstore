@@ -13,25 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include the mctc-lib project
-if(NOT TARGET mctc-lib)
-  if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/mctc-lib/CMakeLists.txt)
-    add_subdirectory("mctc-lib")
+set(_lib "mctc-lib")
+set(_pkg "MCTCLIB")
+set(_url "https://github.com/grimme-lab/mctc-lib")
+
+if(NOT DEFINED "${_pkg}_FIND_METHOD")
+  if(DEFINED "${PROJECT_NAME}-dependency-method")
+    set("${_pkg}_FIND_METHOD" "${${PROJECT_NAME}-dependency-method}")
   else()
-    set("mctc-lib-url" "https://github.com/grimme-lab/mctc-lib")
-    message(STATUS "Retrieving mctc-lib from ${mctc-lib-url}")
-    include(FetchContent)
-    FetchContent_Declare(
-      "mctc-lib"
-      GIT_REPOSITORY "${mctc-lib-url}"
-      GIT_TAG "HEAD"
-    )
-    FetchContent_MakeAvailable("mctc-lib")
+    set("${_pkg}_FIND_METHOD" "cmake" "pkgconf" "subproject" "fetch")
   endif()
+  set("_${_pkg}_FIND_METHOD")
 endif()
 
-list(
-  APPEND lib-deps
-  "mctc-lib"
-)
-set(lib-deps "${lib-deps}" PARENT_SCOPE)
+include("${CMAKE_CURRENT_LIST_DIR}/mstore-utils.cmake")
+
+mstore_find_package("${_lib}" "${${_pkg}_FIND_METHOD}" "${_url}")
+
+if(DEFINED "_${_pkg}_FIND_METHOD")
+  unset("${_pkg}_FIND_METHOD")
+  unset("_${_pkg}_FIND_METHOD")
+endif()
+unset(_lib)
+unset(_pkg)
+unset(_url)
