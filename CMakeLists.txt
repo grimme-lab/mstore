@@ -26,12 +26,17 @@ project(
 # Follow GNU conventions for installing directories
 include(GNUInstallDirs)
 
-# Collect subprojects
-set(lib-deps)
-add_subdirectory("subprojects" EXCLUDE_FROM_ALL)
-
 # General configuration information
 add_subdirectory("config")
+
+# Collect subprojects
+if(NOT TARGET "mctc-lib::mctc-lib")
+  find_package("mctc-lib")
+endif()
+set(
+  lib-deps
+  "mctc-lib::mctc-lib"
+)
 
 # Collect source of the project
 set(srcs)
@@ -61,6 +66,7 @@ target_include_directories(
   PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${module-dir}>
 )
 
 # Add example application
@@ -88,7 +94,7 @@ install(
 install(
   DIRECTORY
   "${CMAKE_CURRENT_BINARY_DIR}/include/"
-  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${module-dir}"
 )
 # Package license files
 install(
