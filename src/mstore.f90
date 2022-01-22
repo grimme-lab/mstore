@@ -102,7 +102,9 @@ subroutine get_record(mol, collection, record, error)
       return
    end if
 
-   call store%collections(is)%records(ir)%get(mol)
+   associate(record => store%collections(is)%records(ir)) 
+      call record%get(mol)
+   end associate
 
 end subroutine get_record
 
