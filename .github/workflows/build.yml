@@ -16,7 +16,7 @@ jobs:
 
     env:
       FC: gfortran
-      GCC_V: 9
+      GCC_V: 10
 
     steps:
     - name: Checkout code
