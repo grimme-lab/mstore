@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # This file is part of mstore.
 # SPDX-Identifier: Apache-2.0
 #
