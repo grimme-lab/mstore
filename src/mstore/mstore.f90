@@ -20,18 +20,18 @@ module mstore
    use mstore_data_collection, only : collection_type, new_collection, select_collection
    use mstore_data_record, only : select_record
    use mstore_data_store, only : store_type, new_store
-   use mstore_amino20x4, only : get_amino20x4_records
-   use mstore_but14diol, only : get_but14diol_records
-   use mstore_heavy28, only : get_heavy28_records
-   use mstore_ice10, only : get_ice10_records
-   use mstore_il16, only : get_il16_records
-   use mstore_mb16_43, only : get_mb16_43_records
-   use mstore_upu23, only : get_upu23_records
-   use mstore_x23, only : get_x23_records
+   use mstore_collections_amino20x4, only : get_amino20x4_records
+   use mstore_collections_but14diol, only : get_but14diol_records
+   use mstore_collections_heavy28, only : get_heavy28_records
+   use mstore_collections_ice10, only : get_ice10_records
+   use mstore_collections_il16, only : get_il16_records
+   use mstore_collections_mb16_43, only : get_mb16_43_records
+   use mstore_collections_upu23, only : get_upu23_records
+   use mstore_collections_x23, only : get_x23_records
    implicit none
    private
 
-   public :: get_structure
+   public :: get_structure, get_record
    public :: list_collections, list_records
 
    type(store_type), allocatable :: store

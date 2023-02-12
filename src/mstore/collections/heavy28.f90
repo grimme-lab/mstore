@@ -13,7 +13,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-module mstore_heavy28
+module mstore_collections_heavy28
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
    use mstore_data_record, only : record_type, new_record, select_record
@@ -674,4 +674,4 @@ subroutine teh2_nh3(self)
    call new(self, sym, xyz)
 end subroutine teh2_nh3
 
-end module mstore_heavy28
+end module mstore_collections_heavy28

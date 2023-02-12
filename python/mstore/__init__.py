@@ -12,19 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Python API of the mstore project"""
 
-if(WITH_API)
-  add_subdirectory("api")
-endif()
-
-add_subdirectory("collections")
-add_subdirectory("data")
-
-set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
-
-list(
-  APPEND srcs
-  "${dir}/version.f90"
-)
-
-set(srcs "${srcs}" PARENT_SCOPE)
+# make sure we have a CFFI available
+import cffi

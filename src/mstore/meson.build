@@ -13,15 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+if get_option('api') or get_option('python')
+  subdir('api')
+endif
+
+subdir('collections')
 subdir('data')
 
 srcs += files(
-  'amino20x4.f90',
-  'but14diol.f90',
-  'heavy28.f90',
-  'ice10.f90',
-  'il16.f90',
-  'mb16_43.f90',
-  'upu23.f90',
-  'x23.f90',
+  'mstore.f90',
+  'version.f90',
 )

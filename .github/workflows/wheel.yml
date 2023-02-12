@@ -1,0 +1,140 @@
+name: wheel
+
+on:
+  push:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  sdist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Reorganize repository
+        run: |
+          git config user.email ""
+          git config user.name "dummy"
+          git subtree add --prefix python/subprojects/mstore . HEAD
+          git mv python/{mesonpep517,pyproject}.toml
+          git commit -m "Python dist"
+
+      - name: Build source distribution
+        run: |
+          pipx run build python/ --sdist --outdir .
+
+      - name: Upload source distribution
+        uses: actions/upload-artifact@v3
+        with:
+          name: mstore-python-sdist
+          path: ./*.tar.gz
+          retention-days: 5
+
+  manylinux:
+    needs:
+      - sdist
+    runs-on: ubuntu-latest
+    container: condaforge/linux-anvil-cos7-x86_64
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+    defaults:
+      run:
+        shell: ${{ matrix.shell || 'bash -l {0}' }}
+
+    steps:
+      - name: Create environment
+        run: >-
+          mamba create -n wheel
+          --yes
+          c-compiler
+          fortran-compiler
+          python=${{ matrix.python }}
+          auditwheel
+          git
+          python
+          pip
+          python-build
+          pkgconfig
+          patchelf
+          cffi
+          numpy
+          meson
+          unzip
+          wheel
+
+      - name: Download sdist
+        uses: actions/download-artifact@v3
+        with:
+          name: mstore-python-sdist
+
+      - name: Build wheel
+        run: |
+          conda activate wheel
+          set -ex
+          tar xvf mstore-*.tar.gz
+          python -m build mstore-*/ --wheel
+          auditwheel show mstore-*/dist/*.whl
+          auditwheel repair -w . mstore-*/dist/*.whl --plat ${{ env.plat }}
+        env:
+          plat: manylinux${{ matrix.python == '3.6' && '2010' || '_2_12' }}_x86_64
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: mstore-python-${{ matrix.python }}
+          path: ./*.whl
+          retention-days: 5
+
+  release:
+    needs:
+      - sdist
+      - manylinux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: ${{ github.workspace }} # This will download all files
+
+      - name: Create SHA256 checksums
+        run: |
+          set -ex
+          for output in mstore*/mstore*; do
+            pushd $(dirname "$output")
+            sha256sum $(basename "$output") | tee $(basename "$output").sha256
+            popd
+          done
+
+      - name: Copy release artifacts
+        run: |
+          mkdir dist/
+          cp -v mstore*/mstore*.whl mstore*/mstore*.tar.gz dist/
+
+      - name: Publish to Test PyPI
+        if: ${{ github.event_name == 'release' }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+
+      - name: Upload assets
+        uses: svenstaro/upload-release-action@v2
+        if: ${{ github.event_name == 'release' }}
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: mstore*/mstore*
+          file_glob: true
+          tag: ${{ github.ref }}
+          overwrite: true
+
+      - name: Publish to PyPI
+        if: ${{ github.event_name == 'release' }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}

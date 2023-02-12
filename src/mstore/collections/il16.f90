@@ -13,7 +13,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-module mstore_il16
+module mstore_collections_il16
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
    use mstore_data_record, only : record_type, new_record, select_record
@@ -1153,4 +1153,4 @@ subroutine il231B(self)
    call new(self, sym, xyz, charge=charge)
 end subroutine il231B
 
-end module mstore_il16
+end module mstore_collections_il16

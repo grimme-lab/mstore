@@ -20,3 +20,24 @@ option(
   yield: true,
   description: 'use OpenMP parallelisation',
 )
+
+option(
+  'api',
+  type: 'boolean',
+  value: true,
+  description: 'Build C API using iso_c_binding module',
+)
+
+option(
+  'python',
+  type: 'boolean',
+  value: false,
+  description: 'Build Python extension module',
+)
+
+option(
+  'python_version',
+  type: 'string',
+  value: 'python3',
+  description: 'Python version to link against.',
+)

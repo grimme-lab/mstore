@@ -13,18 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if(WITH_API)
-  add_subdirectory("api")
-endif()
-
-add_subdirectory("collections")
-add_subdirectory("data")
-
-set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
-
-list(
-  APPEND srcs
-  "${dir}/version.f90"
+srcs += files(
+  'amino20x4.f90',
+  'but14diol.f90',
+  'heavy28.f90',
+  'ice10.f90',
+  'il16.f90',
+  'mb16_43.f90',
+  'upu23.f90',
+  'x23.f90',
 )
-
-set(srcs "${srcs}" PARENT_SCOPE)

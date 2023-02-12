@@ -15,7 +15,7 @@
 
 program main_info
    use, intrinsic :: iso_fortran_env, only : output_unit, error_unit, input_unit
-   use mctc_env, only : error_type, fatal_error, wp
+   use mctc_env, only : error_type, fatal_error
    use mctc_io, only : write_structure, structure_type, filetype, get_filetype
    use mctc_version, only : get_mctc_version
    use mctc_io_symbols, only : to_symbol
@@ -27,8 +27,6 @@ program main_info
    integer, allocatable :: output_format
    type(structure_type) :: mol
    type(error_type), allocatable :: error
-   integer :: idx, unit, stat, tmp
-   logical :: exist
 
    call get_arguments(collection, record, output, output_format, error)
    if (allocated(error)) then

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["meson-python", "cffi"]
+build-backend = "mesonpy"
+
+[project]
+name = "mstore"
+version = "0.2.0"
+description = "Molecular structure store for testing"
+readme = "README.rst"
+license.text = "Apache-2.0"
+urls.repository = "https://github.com/mstore/mstore"
+urls.documentation = "https://mstore.readthedocs.io"
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Fortran",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+requires-python = ">=3.8"
+dependencies = [
+   "cffi",
+   "numpy",
+]
+optional-dependencies.ase = ["ase"]
+optional-dependencies.test = [
+  "pytest",
+  "pytest-cov",
+]

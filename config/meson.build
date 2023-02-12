@@ -15,6 +15,10 @@
 
 os = host_machine.system()
 fc = meson.get_compiler('fortran')
+cc = fc
+if has_cc
+  cc = meson.get_compiler('c')
+endif
 fc_id = fc.get_id()
 
 if fc_id == 'gcc'
@@ -28,7 +32,7 @@ elif fc_id == 'intel'
     '-traceback',
     language: 'fortran',
   )
-elif fc_id == 'pgi'
+elif fc_id == 'pgi' or fc_id == 'nvidia_hpc'
   add_project_arguments(
     '-Mbackslash',
     '-Mallocatable=03',
@@ -43,22 +47,10 @@ if get_option('openmp')
 endif
 
 # Create the tool chain library as subproject
-mctc_dep = dependency('mctc-lib', required: false)
-if not mctc_dep.found()
-  mctc_prj = subproject(
-    'mctc-lib',
-    version: '>=0.2',
-    default_options: [
-      'default_library=static',
-    ],
-  )
-  mctc_dep = mctc_prj.get_variable('mctc_dep')
-
-  if install
-    install_data(
-      mctc_prj.get_variable('mctc_lic'),
-      install_dir: get_option('datadir')/'licenses'/meson.project_name()/'mctc-lib'
-    )
-  endif
-endif
+mctc_dep = dependency(
+  'mctc-lib',
+  version: '>=0.3.0',
+  fallback: ['mctc-lib', 'mctc_dep'],
+  default_options: ['default_library=static'],
+)
 lib_deps += mctc_dep

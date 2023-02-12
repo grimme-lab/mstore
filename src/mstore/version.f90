@@ -13,6 +13,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
+!> Interfaces to query the version information of the library.
 module mstore_version
    implicit none
    private
