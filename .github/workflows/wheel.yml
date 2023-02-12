@@ -2,9 +2,16 @@ name: wheel
 
 on:
   push:
-  workflow_dispatch:
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+      - "*.rst"
+      - ".*"
+
   release:
     types: [published]
+
+  workflow_dispatch:
 
 jobs:
   sdist:
