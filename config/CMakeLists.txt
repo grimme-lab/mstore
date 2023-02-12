@@ -15,7 +15,9 @@
 
 option(BUILD_SHARED_LIBS "Whether the libraries built should be shared" FALSE)
 
-if(NOT DEFINED "${PROJECT_NAME}-dependeny-method")
+option(WITH_API "Enable export of C-API" TRUE)
+
+if(NOT DEFINED "${PROJECT_NAME}-dependency-method")
   set(
     "${PROJECT_NAME}-dependency-method"
     "subproject" "cmake" "pkgconf" "fetch"
