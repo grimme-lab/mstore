@@ -29,23 +29,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
         build: [cmake, fpm, meson]
         gcc_v: [10, 11]
 
-        include:
+        exclude:
           - os: macos-latest
-            build: [cmake, meson]
+            build: fpm
 
+        include:
           - os: windows-latest
             build: meson
-            shell: msys2 {0}
             msystem: MINGW64 # MINGW32
             arch: x86_64 # arch: i686
 
     defaults:
       run:
-        shell: ${{ matrix.shell || 'bash' }}
+        shell: ${{ contains(matrix.os, 'windows') && 'msys2 {0}' || 'bash' }}
 
     env:
       FC: gfortran
@@ -89,14 +89,13 @@ jobs:
             git
             mingw-w64-${{ matrix.arch }}-gcc-fortran
             mingw-w64-${{ matrix.arch }}-cmake
-            mingw-w64-${{ matrix.arch }}-python
-            mingw-w64-${{ matrix.arch }}-python-pip
+            mingw-w64-${{ matrix.arch }}-meson
             mingw-w64-${{ matrix.arch }}-ninja
 
       # MESON
 
       - name: Install meson
-        if: ${{ matrix.build == 'meson' }}
+        if: ${{ matrix.build == 'meson' && ! contains(matrix.os, 'windows') }}
         run: pip3 install meson>=${{ env.MESON_V }} ninja
 
       - name: Configure build (meson)
@@ -121,7 +120,7 @@ jobs:
       # CMAKE
 
       - name: Install cmake
-        if: ${{ matrix.build == 'cmake' }}
+        if: ${{ matrix.build == 'cmake' && ! contains(matrix.os, 'windows') }}
         run: pip3 install ninja cmake
 
       - name: Configure build (CMake)
