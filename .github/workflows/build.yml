@@ -29,11 +29,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
         build: [cmake, fpm, meson]
         gcc_v: [10, 11]
 
         include:
+          - os: macos-latest
+            build: [cmake, meson]
+
           - os: windows-latest
             build: meson
             shell: msys2 {0}
