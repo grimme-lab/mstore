@@ -105,7 +105,8 @@ def get_structure_from_name(collection, record):
         ),
         _delete_structure,
     )
-
+    
+    # the following is probably a little bit pedestrian, but it works...
     _natoms = ffi.new("int *")
     error_check(lib.mstore_get_structure_number_of_atoms)(cmol, _natoms)
 

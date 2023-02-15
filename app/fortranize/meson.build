@@ -17,5 +17,5 @@ mstore_fortranize_exe = executable(
   'mstore-fortranize',
   sources: files('main.f90'),
   dependencies: mstore_dep,
-  install: false,
+  install: install,
 )

@@ -16,3 +16,6 @@
 
 # make sure we have a CFFI available
 import cffi
+
+from interface import Structure, get_structure
+from library import get_version
