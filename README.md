@@ -4,19 +4,18 @@
 [![Release](https://img.shields.io/github/v/release/grimme-lab/mstore)](https://github.com/grimme-lab/mstore/releases/latest)
 [![CI](https://github.com/grimme-lab/mstore/workflows/CI/badge.svg)](https://github.com/grimme-lab/mstore/actions)
 
-
 ## Installation
 
 To build this project from the source code in this repository you need to have
 a Fortran compiler supporting Fortran 2008 and one of the supported build systems:
-- [meson](https://mesonbuild.com) version 0.53 or newer, with
-  a build-system backend, *i.e.* [ninja](https://ninja-build.org) version 1.7 or newer
+
+- [meson](https://mesonbuild.com) version 0.57.2 or newer, with
+  a build-system backend, _i.e._ [ninja](https://ninja-build.org) version 1.7 or newer
 - [cmake](https://cmake.org) version 3.14 or newer, with
-  a build-system backend, *i.e.* [ninja](https://ninja-build.org) version 1.10 or newer
+  a build-system backend, _i.e._ [ninja](https://ninja-build.org) version 1.10 or newer
 - [fpm](https://github.com/fortran-lang/fpm) version 0.2.0 or newer
 
 Supported for this project are GCC and Intel compilers.
-
 
 ### Building with meson
 
@@ -33,7 +32,7 @@ To compile the project run
 meson compile -C _build
 ```
 
-To include ``mstore`` in your project add the following wrap file to your subprojects directory:
+To include `mstore` in your project add the following wrap file to your subprojects directory:
 
 ```ini
 [wrap-git]
@@ -50,7 +49,6 @@ mstore_dep = dependency('mstore', ['mstore', 'mstore_dep'])
 
 and add it as dependency to your targets.
 
-
 ### Building with CMake
 
 Setup a new build with
@@ -66,7 +64,7 @@ To compile the project run
 cmake --build _build
 ```
 
-To include ``mstore`` in your CMake project retrieve it using the ``FetchContent`` module:
+To include `mstore` in your CMake project retrieve it using the `FetchContent` module:
 
 ```cmake
 if(NOT TARGET mstore)
@@ -82,12 +80,11 @@ if(NOT TARGET mstore)
 endif()
 ```
 
-And link against the ``"mstore"`` interface library.
+And link against the `"mstore"` interface library.
 
 ```cmake
 target_link_libraries("${PROJECT_NAME}-lib" PUBLIC "mstore")
 ```
-
 
 ### Building with fpm
 
@@ -97,23 +94,22 @@ Invoke fpm in the project root with
 fpm build
 ```
 
-You can access the ``mstore-info`` and ``mstore-fortranize`` programs using the run subcommand
+You can access the `mstore-info` and `mstore-fortranize` programs using the run subcommand
 
 ```
 fpm run mstore-info
 ```
 
-To use ``mstore`` for testing include it as development dependency in your package manifest
+To use `mstore` for testing include it as development dependency in your package manifest
 
 ```toml
 [dev-dependencies]
 mstore.git = "https://github.com/grimme-lab/mstore"
 ```
 
-
 ## Example
 
-To use this project in your testsuite just invoke the ``get_structure`` routine of the ``mstore`` module:
+To use this project in your testsuite just invoke the `get_structure` routine of the `mstore` module:
 
 ```f90
 use mctc_io
@@ -123,20 +119,19 @@ type(structure_type) :: mol
 call get_structure(mol, "MB16-43", "01")
 ```
 
-The ``get_structure`` routine loads a geometry, here *01*, of a  benchmark set, here *MB16-43*, into a ``structure_type``.
+The `get_structure` routine loads a geometry, here _01_, of a benchmark set, here _MB16-43_, into a `structure_type`.
 Currently available benchmark sets are
 
-- *Amino20x4*
-- *But14diol*
-- *Heavy28*
-- *ICE10*
-- *IL16*
-- *MB16-43*
-- *UPU23*
-- *X23*
+- _Amino20x4_
+- _But14diol_
+- _Heavy28_
+- _ICE10_
+- _IL16_
+- _MB16-43_
+- _UPU23_
+- _X23_
 
 For the detailed record names of the benchmarks look up the respective benchmark entry.
-
 
 ## License
 
@@ -146,8 +141,8 @@ You may obtain a copy of the License at
 http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an *“as is” basis*,
-*without warranties or conditions of any kind*, either express or implied.
+distributed under the License is distributed on an _“as is” basis_,
+_without warranties or conditions of any kind_, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 

@@ -13,19 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_subdirectory("collections")
-add_subdirectory("data")
-
-set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
-
-list(
-  APPEND srcs
-  "${dir}/mstore.f90"
-  "${dir}/version.f90"
+project(
+  'mstore',
+  'c',
+  version: '0.2.0',
+  license: 'Apache-2.0',
+  meson_version: '>=0.57.2',
+  default_options: [
+    'buildtype=debugoptimized',
+  ],
 )
+install = true
 
-if(WITH_API)
-  add_subdirectory("api")
-endif()
+mstore_dep = dependency(
+  'mstore',
+  version: '>=@0@'.format(meson.project_version()),
+  fallback: ['mstore', 'mstore_dep'],
+  default_options: [
+    'default_library=static',
+    'api=true',
+    'python=false',
+  ],
+)
+mstore_header = files('include'/'_mstore.h')
 
-set(srcs "${srcs}" PARENT_SCOPE)
+subdir('mstore')

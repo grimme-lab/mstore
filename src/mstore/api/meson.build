@@ -13,19 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_subdirectory("collections")
-add_subdirectory("data")
-
-set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
-
-list(
-  APPEND srcs
-  "${dir}/mstore.f90"
-  "${dir}/version.f90"
+srcs += files(
+  'error.f90',
+  'structure.f90',
+  'utils.f90',
+  'version.f90',
 )
-
-if(WITH_API)
-  add_subdirectory("api")
-endif()
-
-set(srcs "${srcs}" PARENT_SCOPE)

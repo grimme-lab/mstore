@@ -32,6 +32,8 @@
 *.app
 
 # Directories
-/build*/
-/_*/
 /docs*/
+/build*/
+/install*/
+/venv*/
+/_*/

@@ -13,7 +13,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-module mstore_but14diol
+module mstore_collections_but14diol
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
    use mstore_data_record, only : record_type, new_record, select_record
@@ -1852,4 +1852,4 @@ subroutine b65(self)
    call new(self, sym, xyz)
 end subroutine b65
 
-end module mstore_but14diol
+end module mstore_collections_but14diol

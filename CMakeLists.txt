@@ -18,7 +18,7 @@ get_directory_property(is-subproject PARENT_DIRECTORY)
 
 project(
   "mstore"
-  LANGUAGES "Fortran"
+  LANGUAGES "Fortran" "C"
   VERSION "0.2.0"
   DESCRIPTION "Molecular structure store for testing"
 )
@@ -54,7 +54,7 @@ set_target_properties(
   OUTPUT_NAME "${PROJECT_NAME}"
   VERSION "${PROJECT_VERSION}"
   SOVERSION "${PROJECT_VERSION_MAJOR}"
-  Fortran_MODULE_DIRECTORY "${PROJECT_BINARY_DIR}/include"
+  Fortran_MODULE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include"
 )
 target_link_libraries(
   "${PROJECT_NAME}-lib"
@@ -64,7 +64,8 @@ target_link_libraries(
 target_include_directories(
   "${PROJECT_NAME}-lib"
   PUBLIC
-  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${module-dir}>
 )

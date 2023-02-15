@@ -13,7 +13,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-module mstore_amino20x4
+module mstore_collections_amino20x4
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
    use mstore_data_record, only : record_type, new_record, select_record
@@ -4102,4 +4102,4 @@ subroutine VAL_xak(self)
    call new(self, sym, xyz)
 end subroutine VAL_xak
 
-end module mstore_amino20x4
+end module mstore_collections_amino20x4

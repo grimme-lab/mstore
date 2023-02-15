@@ -12,20 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+General checks for the library interface and its wrappers.
+"""
 
-add_subdirectory("collections")
-add_subdirectory("data")
+from mstore.library import get_version
 
-set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
-list(
-  APPEND srcs
-  "${dir}/mstore.f90"
-  "${dir}/version.f90"
-)
+def test_version():
+    """Check if we can retrieve some version from the library"""
 
-if(WITH_API)
-  add_subdirectory("api")
-endif()
-
-set(srcs "${srcs}" PARENT_SCOPE)
+    assert get_version() > (0, 0, 0)

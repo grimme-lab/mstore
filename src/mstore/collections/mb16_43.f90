@@ -13,7 +13,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-module mstore_mb16_43
+module mstore_collections_mb16_43
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
    use mstore_data_record, only : record_type, new_record, select_record
@@ -1422,4 +1422,4 @@ subroutine SiH4(self)
    call new(self, sym, xyz)
 end subroutine SiH4
 
-end module mstore_mb16_43
+end module mstore_collections_mb16_43

@@ -15,7 +15,3 @@
 
 subdir('mstore')
 
-srcs += files(
-  'mstore.f90',
-  'mstore_version.f90',
-)
