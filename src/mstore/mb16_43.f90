@@ -85,7 +85,9 @@ subroutine get_mb16_43_records(records)
       new_record('O2', O2), &
       new_record('P2', P2), &
       new_record('S2', S2), &
-      new_record('SiH4', SiH4) &
+      new_record('PCl', PCl), &
+      new_record('SiH4', SiH4), &
+      new_record('CeCl3', CeCl3) &
       ]
 
 end subroutine get_mb16_43_records
@@ -1407,6 +1409,18 @@ subroutine S2(self)
    call new(self, sym, xyz)
 end subroutine S2
 
+subroutine PCl(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 2
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "P", "Cl"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.00000000000000_wp,  0.00000000000000_wp, -1.91672219824962_wp, &
+      &  0.00000000000000_wp,  0.00000000000000_wp,  1.91672219824962_wp],&
+      & shape(xyz))
+   call new(self, sym, xyz)
+end subroutine PCl
+
 subroutine SiH4(self)
    type(structure_type), intent(out) :: self
    integer, parameter :: nat = 5
@@ -1421,5 +1435,19 @@ subroutine SiH4(self)
       & shape(xyz))
    call new(self, sym, xyz)
 end subroutine SiH4
+
+subroutine CeCl3(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 4
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Ce", "Cl", "Cl", "Cl"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      & -1.27856652880800_wp,  1.27787818507814_wp, -1.27775264265885_wp, &
+      &  3.22922632838831_wp,  2.49019149650794_wp, -2.49029228642597_wp, &
+      & -2.48733682732001_wp, -3.23161500918965_wp, -2.48733351877882_wp, &
+      & -2.48688477166153_wp,  2.48710712700479_wp,  3.23181664846241_wp],&
+      & shape(xyz))
+   call new(self, sym, xyz)
+end subroutine CeCl3
 
 end module mstore_mb16_43
