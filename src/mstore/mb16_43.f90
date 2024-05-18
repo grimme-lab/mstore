@@ -87,7 +87,9 @@ subroutine get_mb16_43_records(records)
       new_record('S2', S2), &
       new_record('PCl', PCl), &
       new_record('SiH4', SiH4), &
-      new_record('CeCl3', CeCl3) &
+      new_record('CeCl3', CeCl3), &
+      new_record('AcCl6', AcCl6), &
+      new_record('AcCf', AcCf) &
       ]
 
 end subroutine get_mb16_43_records
@@ -1449,5 +1451,38 @@ subroutine CeCl3(self)
       & shape(xyz))
    call new(self, sym, xyz)
 end subroutine CeCl3
+
+subroutine AcCl6(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 7
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Ac", "Cl", "Cl", "Cl", "Cl", "Cl", "Cl"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.00008500680087_wp, -0.00013948134627_wp,  0.00028153808429_wp, &
+      &  0.00019164221735_wp, -0.00014687089066_wp,  5.15320096510534_wp, &
+      &  0.00004226821807_wp,  0.00005671238880_wp, -5.15267233955303_wp, &
+      & -0.00032197779468_wp, -5.15352035687762_wp, -0.00012585350687_wp, &
+      & -0.00003451216376_wp,  5.15327261073759_wp, -0.00038499090056_wp, &
+      & -5.15287934187094_wp,  0.00007143910176_wp, -0.00022458050183_wp, &
+      &  5.15293581185431_wp,  0.00038704962512_wp, -0.00009363598857_wp],&
+      & shape(xyz))
+   integer, parameter :: uhf = 1
+   call new(self, sym, xyz, uhf=uhf)
+   !call new(self, sym, xyz)
+end subroutine AcCl6
+
+subroutine AcCf(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 2
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Ac", "Cf"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.00000000000000_wp,  0.00000000000000_wp, -2.31672219824962_wp, &
+      &  0.00000000000000_wp,  0.00000000000000_wp,  2.31672219824962_wp],&
+      & shape(xyz))
+   integer, parameter :: uhf = 1
+   call new(self, sym, xyz, uhf=uhf)
+   !call new(self, sym, xyz)
+end subroutine AcCf
 
 end module mstore_mb16_43
