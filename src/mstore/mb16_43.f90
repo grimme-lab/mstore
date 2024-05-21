@@ -86,10 +86,7 @@ subroutine get_mb16_43_records(records)
       new_record('P2', P2), &
       new_record('S2', S2), &
       new_record('PCl', PCl), &
-      new_record('SiH4', SiH4), &
-      new_record('CeCl3', CeCl3), &
-      new_record('AcCl6', AcCl6), &
-      new_record('AcCf', AcCf) &
+      new_record('SiH4', SiH4) &
       ]
 
 end subroutine get_mb16_43_records

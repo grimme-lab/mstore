@@ -28,6 +28,7 @@ module mstore
    use mstore_mb16_43, only : get_mb16_43_records
    use mstore_upu23, only : get_upu23_records
    use mstore_x23, only : get_x23_records
+   use mstore_f_block, only : get_f_block_records
    implicit none
    private
 
@@ -134,7 +135,8 @@ subroutine get_mstore_collections(collections)
       new_collection("IL16", get_il16_records), &
       new_collection("MB16-43", get_mb16_43_records), &
       new_collection("UPU23", get_upu23_records), &
-      new_collection("X23", get_x23_records) &
+      new_collection("X23", get_x23_records), &
+      new_collection("f-block", get_f_block_records) &
       ]
 
 end subroutine get_mstore_collections

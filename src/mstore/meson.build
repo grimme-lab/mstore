@@ -24,4 +24,5 @@ srcs += files(
   'mb16_43.f90',
   'upu23.f90',
   'x23.f90',
+  'f_block.f90',
 )

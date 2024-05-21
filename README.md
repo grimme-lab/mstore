@@ -134,6 +134,7 @@ Currently available benchmark sets are
 - *MB16-43*
 - *UPU23*
 - *X23*
+- *f-block*
 
 For the detailed record names of the benchmarks look up the respective benchmark entry.
 
