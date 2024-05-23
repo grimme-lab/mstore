@@ -27,6 +27,7 @@ list(
   "${dir}/mb16_43.f90"
   "${dir}/upu23.f90"
   "${dir}/x23.f90"
+  "${dir}/f_block.f90"
 )
 
 set(srcs "${srcs}" PARENT_SCOPE)

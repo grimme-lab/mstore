@@ -85,6 +85,7 @@ subroutine get_mb16_43_records(records)
       new_record('O2', O2), &
       new_record('P2', P2), &
       new_record('S2', S2), &
+      new_record('PCl', PCl), &
       new_record('SiH4', SiH4) &
       ]
 
@@ -1406,6 +1407,18 @@ subroutine S2(self)
       & shape(xyz))
    call new(self, sym, xyz)
 end subroutine S2
+
+subroutine PCl(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 2
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "P", "Cl"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.00000000000000_wp,  0.00000000000000_wp, -1.91672219824962_wp, &
+      &  0.00000000000000_wp,  0.00000000000000_wp,  1.91672219824962_wp],&
+      & shape(xyz))
+   call new(self, sym, xyz)
+end subroutine PCl
 
 subroutine SiH4(self)
    type(structure_type), intent(out) :: self
