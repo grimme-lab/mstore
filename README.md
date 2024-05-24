@@ -135,7 +135,7 @@ Currently available benchmark sets are
 - *UPU23*
 - *X23*
 
-Furthermore, some test systems beyond of published benchmark sets are collected:
+Furthermore, some test systems beyond published benchmark sets are also collected:
 
 - *f-block*
 
