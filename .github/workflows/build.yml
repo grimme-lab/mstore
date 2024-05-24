@@ -1,6 +1,21 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+      - "*.rst"
+      - ".*"
+
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+      - "*.rst"
+      - ".*"
+
+  workflow_dispatch:
 
 env:
   M_BUILD_DIR: _build_meson
@@ -12,36 +27,41 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-13]
 
     env:
       FC: gfortran
       GCC_V: 10
+      PYTHON_V: 3.8
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - uses: actions/setup-python@v1
+    - name: Setup Python version ${{ env.PYTHON_V }}
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: ${{ env.PYTHON_V }}
 
     - name: Install GCC (OSX)
       if: contains(matrix.os, 'macos')
       run: |
-          ln -s /usr/local/bin/gfortran-${GCC_V} /usr/local/bin/gfortran
-          which gfortran-${GCC_V}
-          which gfortran
+        brew install gcc@${{ env.GCC_V }}
+        ln -s /usr/local/bin/gfortran-${{ env.GCC_V }} /usr/local/bin/gfortran
+        ln -s /usr/local/bin/gcc-${{ env.GCC_V }} /usr/local/bin/gcc
+        ln -s /usr/local/bin/g++-${{ env.GCC_V }} /usr/local/bin/g++
+        which gfortran
 
     - name: Install GCC (Linux)
       if: contains(matrix.os, 'ubuntu')
       run: |
-        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
+        sudo update-alternatives \
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
         --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
         --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.56.2 ninja cmake
+      run: pip3 install meson==0.57.2 ninja cmake
 
     - name: Configure meson build
       run: meson setup ${{ env.M_BUILD_DIR }}

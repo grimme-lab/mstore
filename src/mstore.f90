@@ -130,13 +130,13 @@ subroutine get_mstore_collections(collections)
    collections = [ &
       new_collection("Amino20x4", get_amino20x4_records), &
       new_collection("But14diol", get_but14diol_records), &
+      new_collection("f-block", get_f_block_records), &
       new_collection("Heavy28", get_heavy28_records), &
       new_collection("ICE10", get_ice10_records), &
       new_collection("IL16", get_il16_records), &
       new_collection("MB16-43", get_mb16_43_records), &
       new_collection("UPU23", get_upu23_records), &
-      new_collection("X23", get_x23_records), &
-      new_collection("f-block", get_f_block_records) &
+      new_collection("X23", get_x23_records) &
       ]
 
 end subroutine get_mstore_collections
