@@ -19,7 +19,7 @@ get_directory_property(is-subproject PARENT_DIRECTORY)
 project(
   "mstore"
   LANGUAGES "Fortran"
-  VERSION "0.2.0"
+  VERSION "0.3.0"
   DESCRIPTION "Molecular structure store for testing"
 )
 
