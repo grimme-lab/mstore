@@ -4,9 +4,9 @@ module mstore_large
    use mstore_data_record, only : record_type, new_record
    implicit none
    private
-   public :: get_tools_large_records
+   public :: get_large_records
 contains
-subroutine get_tools_large_records(records)
+subroutine get_large_records(records)
    type(record_type), allocatable, intent(out) :: records(:)
    records = [ &
       new_record('hs13l_12alcb', hs13l_12alcb), &
@@ -14,7 +14,7 @@ subroutine get_tools_large_records(records)
       new_record('lnci16_brcap', lnci16_brcap), &
       new_record('lnci16_dna', lnci16_dna) &
       ]
-end subroutine get_tools_large_records
+end subroutine get_large_records
 
 subroutine hs13l_12alcb(self)
    type(structure_type), intent(out) :: self
