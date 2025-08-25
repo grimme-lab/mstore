@@ -180,6 +180,10 @@ jobs:
       run: |
         sudo apt-get install -y intel-oneapi-compiler-fortran
 
+    - name: Install libunwind dev
+      run: |
+        sudo apt-get install -y libunwind-dev
+
     - name: Install meson/cmake
       run: pip3 install meson==1.4.1 ninja cmake
 
