@@ -157,7 +157,7 @@ jobs:
         os: [ubuntu-latest]
 
     env:
-      FC: ifort
+      FC: ifx
       OMP_NUM_THREADS: 2,1
 
     steps:
@@ -178,10 +178,10 @@ jobs:
 
     - name: Install Intel oneAPI compiler
       run: |
-        sudo apt-get install -y intel-oneapi-compiler-fortran intel-oneapi-compiler-fortran-classic
+        sudo apt-get install -y intel-oneapi-compiler-fortran
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.57.2 ninja cmake
+      run: pip3 install meson==1.4.1 ninja cmake
 
     - name: Configure meson build
       run: . /opt/intel/oneapi/setvars.sh && meson setup ${{ env.M_BUILD_DIR }}
