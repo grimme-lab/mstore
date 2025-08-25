@@ -49,10 +49,12 @@ if get_option('openmp')
   lib_deps += omp_dep
 endif
 # Detect libunwind (needed for Fortran traceback with some compilers)
-cc = meson.get_compiler('c')
-unwind_lib = cc.find_library('unwind', required: false)
-if unwind_lib.found()
-  lib_deps += unwind_lib
+if meson.has_compiler('c')
+  cc = meson.get_compiler('c')
+  unwind_lib = cc.find_library('unwind', required: false)
+  if unwind_lib.found()
+    lib_deps += unwind_lib
+  endif
 endif
 
 
