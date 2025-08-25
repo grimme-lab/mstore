@@ -48,15 +48,6 @@ if get_option('openmp')
   omp_dep = dependency('openmp')
   lib_deps += omp_dep
 endif
-# Detect libunwind (needed for Fortran traceback with some compilers)
-if meson.has_compiler('c')
-  cc = meson.get_compiler('c')
-  unwind_lib = cc.find_library('unwind', required: false)
-  if unwind_lib.found()
-    lib_deps += unwind_lib
-  endif
-endif
-
 
 # Create the tool chain library as subproject
 mctc_dep = dependency('mctc-lib', required: false)
