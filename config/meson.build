@@ -25,6 +25,13 @@ if fc_id == 'gcc'
   )
 elif fc_id == 'intel'
   add_project_arguments(
+    '-fpp',
+    '-traceback',
+    language: 'fortran',
+  )
+elif fc_id == 'intel-llvm'
+  add_project_arguments(
+    '-fpp',
     '-traceback',
     language: 'fortran',
   )
