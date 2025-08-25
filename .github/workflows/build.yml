@@ -178,28 +178,26 @@ jobs:
 
     - name: Install Intel oneAPI compiler
       run: |
-        sudo apt-get install intel-oneapi-compiler-fortran
-        source /opt/intel/oneapi/setvars.sh
-        printenv >> $GITHUB_ENV
+        sudo apt-get install -y intel-oneapi-compiler-fortran intel-oneapi-compiler-fortran-classic
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.56.2 ninja cmake
+      run: pip3 install meson==0.57.2 ninja cmake
 
     - name: Configure meson build
-      run: meson setup ${{ env.M_BUILD_DIR }}
+      run: . /opt/intel/oneapi/setvars.sh && meson setup ${{ env.M_BUILD_DIR }}
 
     - name: Build library (meson)
-      run: meson compile -C ${{ env.M_BUILD_DIR }}
+      run: . /opt/intel/oneapi/setvars.sh && meson compile -C ${{ env.M_BUILD_DIR }}
 
     - name: Run unit tests (meson)
-      run: meson test -C ${{ env.M_BUILD_DIR }} --print-errorlogs --no-rebuild
+      run: . /opt/intel/oneapi/setvars.sh && meson test -C ${{ env.M_BUILD_DIR }} --print-errorlogs --no-rebuild
 
     - name: Configure cmake build
-      run: cmake -B ${{ env.C_BUILD_DIR }} -G Ninja
+      run: . /opt/intel/oneapi/setvars.sh && cmake -B ${{ env.C_BUILD_DIR }} -G Ninja
 
     - name: Build library (CMake)
-      run: cmake --build ${{ env.C_BUILD_DIR }}
+      run: . /opt/intel/oneapi/setvars.sh && cmake --build ${{ env.C_BUILD_DIR }}
 
     - name: Run unit tests (CTest)
-      run: ctest
+      run: . /opt/intel/oneapi/setvars.sh && ctest
       working-directory: ${{ env.C_BUILD_DIR }}
