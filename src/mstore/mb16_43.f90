@@ -81,6 +81,7 @@ subroutine get_mb16_43_records(records)
       new_record('LiH', LiH), &
       new_record('MgH2', MgH2), &
       new_record('N2', N2), &
+      new_record('NO', NO), &
       new_record('NaH', NaH), &
       new_record('O2', O2), &
       new_record('P2', P2), &
@@ -1359,6 +1360,19 @@ subroutine N2(self)
       & shape(xyz))
    call new(self, sym, xyz)
 end subroutine N2
+
+subroutine NO(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 2
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "N", "O"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.00000000000000_wp,  0.00000000000000_wp, -1.03943592254399_wp, &
+      &  0.00000000000000_wp,  0.00000000000000_wp,  1.03943592254399_wp],&
+      & shape(xyz))
+   integer, parameter :: uhf = 1
+   call new(self, sym, xyz, uhf=uhf)
+end subroutine NO
 
 subroutine NaH(self)
    type(structure_type), intent(out) :: self
