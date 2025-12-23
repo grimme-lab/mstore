@@ -71,7 +71,11 @@ jobs:
       run: pip3 install meson==0.57.2 ninja cmake
 
     - name: Configure meson build
-      run: meson setup ${{ env.M_BUILD_DIR }}
+      run: |
+        export FC="${FC:-gfortran}"
+        export CC="${CC:-gcc}"
+        export CXX="${CXX:-g++}"
+        meson setup ${{ env.M_BUILD_DIR }}
 
     - name: Build library (meson)
       run: meson compile -C ${{ env.M_BUILD_DIR }}
