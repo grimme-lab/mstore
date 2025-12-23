@@ -28,10 +28,15 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-15-intel]
+        include:
+          - os: ubuntu-latest
+            gcc_v: 10
+          - os: macos-15-intel
+            gcc_v: 13
 
     env:
       FC: gfortran
-      GCC_V: 10
+      GCC_V: ${{ matrix.gcc_v }}
       PYTHON_V: 3.8
 
     steps:
