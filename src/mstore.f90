@@ -138,7 +138,7 @@ subroutine get_mstore_collections(collections)
       new_collection("IL16", get_il16_records), &
       new_collection("MB16-43", get_mb16_43_records), &
       new_collection("UPU23", get_upu23_records), &
-      new_collection("ALYLOSE", get_amylose_records), &
+      new_collection("AMYLOSE", get_amylose_records), &
       new_collection("POLYALANINE", get_polyalanine_records), &
       new_collection("X23", get_x23_records) &
       ]
