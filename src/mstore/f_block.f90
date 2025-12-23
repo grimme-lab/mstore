@@ -64,7 +64,7 @@ subroutine get_f_block_records(records)
       new_record('MdCl3', MdCl3), &
       new_record('NoCl3', NoCl3), &
       new_record('LrCl3', LrCl3), &
-      new_record('LrF6', LrF6), &      
+      new_record('LrF6', LrF6), &
       new_record('LrH6', LrH6), &
       new_record('La2', La2), &
       new_record('Ce2', Ce2), &
@@ -284,9 +284,9 @@ subroutine TmCl3(self)
    character(len=*), parameter :: sym(nat) = [character(len=4)::&
       & "Tm", "Cl", "Cl", "Cl"]
    real(wp), parameter :: xyz(3, nat) = reshape([&
-      &  0.30238207087297_wp,  0.40915658962222_wp, -0.74135961337020_wp, & 
-      & -1.88316193081721_wp, -2.68542935396554_wp, -3.27476690321514_wp, & 
-      & -1.87199842360969_wp,  4.16773917183794_wp,  0.64664211658554_wp, & 
+      &  0.30238207087297_wp,  0.40915658962222_wp, -0.74135961337020_wp, &
+      & -1.88316193081721_wp, -2.68542935396554_wp, -3.27476690321514_wp, &
+      & -1.87199842360969_wp,  4.16773917183794_wp,  0.64664211658554_wp, &
       &  4.57998101963198_wp, -0.33831940292595_wp,  0.65470384936243_wp], &
       & shape(xyz))
    integer, parameter :: uhf = 2
@@ -499,9 +499,9 @@ subroutine AmCl3(self)
    character(len=*), parameter :: sym(nat) = [character(len=4)::&
       & "Am", "Cl", "Cl", "Cl"]
    real(wp), parameter :: xyz(3, nat) = reshape([&
-      & -0.01193364698947_wp, -0.03541789303411_wp,  0.07038809832668_wp, & 
-      & -1.76279500408354_wp, -2.52042220577224_wp, -3.52343055390955_wp, & 
-      & -1.78089448153841_wp,  4.31798053098351_wp,  0.35803967157097_wp, & 
+      & -0.01193364698947_wp, -0.03541789303411_wp,  0.07038809832668_wp, &
+      & -1.76279500408354_wp, -2.52042220577224_wp, -3.52343055390955_wp, &
+      & -1.78089448153841_wp,  4.31798053098351_wp,  0.35803967157097_wp, &
       &  4.68282586868943_wp, -0.20899342760849_wp,  0.38022223337450_wp], &
       & shape(xyz))
    integer, parameter :: uhf = 6
