@@ -73,7 +73,7 @@ jobs:
         fi
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.57.2 ninja cmake
+      run: pip3 install meson==1.4.1 ninja cmake
 
     - name: Configure meson build
       run: |
