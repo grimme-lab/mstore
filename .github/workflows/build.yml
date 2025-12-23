@@ -47,10 +47,10 @@ jobs:
       if: contains(matrix.os, 'macos')
       run: |
         brew install gcc@${{ env.GCC_V }}
-        ln -s /usr/local/bin/gfortran-${{ env.GCC_V }} /usr/local/bin/gfortran
-        ln -s /usr/local/bin/gcc-${{ env.GCC_V }} /usr/local/bin/gcc
-        ln -s /usr/local/bin/g++-${{ env.GCC_V }} /usr/local/bin/g++
-        which gfortran
+        echo "$(brew --prefix gcc@${{ env.GCC_V }})/bin" >> $GITHUB_PATH
+        echo "FC=$(brew --prefix gcc@${{ env.GCC_V }})/bin/gfortran-${{ env.GCC_V }}" >> $GITHUB_ENV
+        echo "CC=$(brew --prefix gcc@${{ env.GCC_V }})/bin/gcc-${{ env.GCC_V }}" >> $GITHUB_ENV
+        echo "CXX=$(brew --prefix gcc@${{ env.GCC_V }})/bin/g++-${{ env.GCC_V }}" >> $GITHUB_ENV
 
     - name: Install GCC (Linux)
       if: contains(matrix.os, 'ubuntu')
