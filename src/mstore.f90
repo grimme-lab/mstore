@@ -27,7 +27,8 @@ module mstore
    use mstore_il16, only : get_il16_records
    use mstore_mb16_43, only : get_mb16_43_records
    use mstore_upu23, only : get_upu23_records
-   use mstore_large, only : get_large_records
+   use mstore_amylose, only : get_amylose_records
+   use mstore_polyalanine, only : get_polyalanine_records
    use mstore_x23, only : get_x23_records
    use mstore_f_block, only : get_f_block_records
    implicit none
@@ -137,7 +138,8 @@ subroutine get_mstore_collections(collections)
       new_collection("IL16", get_il16_records), &
       new_collection("MB16-43", get_mb16_43_records), &
       new_collection("UPU23", get_upu23_records), &
-      ! new_collection("TOOLS-LARGE", get_tools_large_records), &
+      new_collection("ALYLOSE", get_amylose_records), &
+      new_collection("POLYALANINE", get_polyalanine_records), &
       new_collection("X23", get_x23_records) &
       ]
 
