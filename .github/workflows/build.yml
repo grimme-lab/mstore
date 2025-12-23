@@ -27,11 +27,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-13]
+        os: [ubuntu-latest, macos-15-intel]
+        include:
+          - os: ubuntu-latest
+            gcc_v: 10
+          - os: macos-15-intel
+            gcc_v: 13
 
     env:
       FC: gfortran
-      GCC_V: 10
+      GCC_V: ${{ matrix.gcc_v }}
       PYTHON_V: 3.8
 
     steps:
@@ -47,24 +52,35 @@ jobs:
       if: contains(matrix.os, 'macos')
       run: |
         brew install gcc@${{ env.GCC_V }}
-        ln -s /usr/local/bin/gfortran-${{ env.GCC_V }} /usr/local/bin/gfortran
-        ln -s /usr/local/bin/gcc-${{ env.GCC_V }} /usr/local/bin/gcc
-        ln -s /usr/local/bin/g++-${{ env.GCC_V }} /usr/local/bin/g++
-        which gfortran
+        echo "$(brew --prefix gcc@${{ env.GCC_V }})/bin" >> $GITHUB_PATH
+        echo "FC=$(brew --prefix gcc@${{ env.GCC_V }})/bin/gfortran-${{ env.GCC_V }}" >> $GITHUB_ENV
+        echo "CC=$(brew --prefix gcc@${{ env.GCC_V }})/bin/gcc-${{ env.GCC_V }}" >> $GITHUB_ENV
+        echo "CXX=$(brew --prefix gcc@${{ env.GCC_V }})/bin/g++-${{ env.GCC_V }}" >> $GITHUB_ENV
 
     - name: Install GCC (Linux)
       if: contains(matrix.os, 'ubuntu')
       run: |
-        sudo update-alternatives \
-        --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
-        --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
-        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
+        if [[ -x "/usr/bin/gcc-${GCC_V}" && -x "/usr/bin/gfortran-${GCC_V}" ]]; then
+          echo "Using GCC ${GCC_V} via update-alternatives"
+          sudo update-alternatives \
+            --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_V} 100 \
+            --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${GCC_V} \
+            --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_V}
+        else
+          echo "GCC ${GCC_V} not found; using default system compilers"
+          gcc --version
+          gfortran --version
+        fi
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.57.2 ninja cmake
+      run: pip3 install meson==1.4.1 ninja cmake
 
     - name: Configure meson build
-      run: meson setup ${{ env.M_BUILD_DIR }}
+      run: |
+        export FC="${FC:-gfortran}"
+        export CC="${CC:-gcc}"
+        export CXX="${CXX:-g++}"
+        meson setup ${{ env.M_BUILD_DIR }}
 
     - name: Build library (meson)
       run: meson compile -C ${{ env.M_BUILD_DIR }}
@@ -103,7 +119,7 @@ jobs:
       uses: msys2/setup-msys2@v2
       with:
         msystem: ${{ matrix.msystem }}
-        update: false
+        update: true
         install: >-
           git
           mingw-w64-${{ matrix.arch }}-gcc-fortran
@@ -147,17 +163,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest]
 
     env:
-      FC: ifort
+      FC: ifx
       OMP_NUM_THREADS: 2,1
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
@@ -171,28 +187,26 @@ jobs:
 
     - name: Install Intel oneAPI compiler
       run: |
-        sudo apt-get install intel-oneapi-compiler-fortran
-        source /opt/intel/oneapi/setvars.sh
-        printenv >> $GITHUB_ENV
+        sudo apt-get install -y intel-oneapi-compiler-fortran
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.56.2 ninja cmake
+      run: pip3 install meson==1.4.1 ninja cmake
 
     - name: Configure meson build
-      run: meson setup ${{ env.M_BUILD_DIR }}
+      run: . /opt/intel/oneapi/setvars.sh && meson setup ${{ env.M_BUILD_DIR }}
 
     - name: Build library (meson)
-      run: meson compile -C ${{ env.M_BUILD_DIR }}
+      run: . /opt/intel/oneapi/setvars.sh && meson compile -C ${{ env.M_BUILD_DIR }}
 
     - name: Run unit tests (meson)
-      run: meson test -C ${{ env.M_BUILD_DIR }} --print-errorlogs --no-rebuild
+      run: . /opt/intel/oneapi/setvars.sh && meson test -C ${{ env.M_BUILD_DIR }} --print-errorlogs --no-rebuild
 
     - name: Configure cmake build
-      run: cmake -B ${{ env.C_BUILD_DIR }} -G Ninja
+      run: . /opt/intel/oneapi/setvars.sh && cmake -B ${{ env.C_BUILD_DIR }} -G Ninja
 
     - name: Build library (CMake)
-      run: cmake --build ${{ env.C_BUILD_DIR }}
+      run: . /opt/intel/oneapi/setvars.sh && cmake --build ${{ env.C_BUILD_DIR }}
 
     - name: Run unit tests (CTest)
-      run: ctest
+      run: . /opt/intel/oneapi/setvars.sh && ctest
       working-directory: ${{ env.C_BUILD_DIR }}

@@ -28,6 +28,8 @@ list(
   "${dir}/mb16_43.f90"
   "${dir}/upu23.f90"
   "${dir}/x23.f90"
+  "${dir}/amylose.f90"
+  "${dir}/polyalanine.f90"
 )
 
 set(srcs "${srcs}" PARENT_SCOPE)
