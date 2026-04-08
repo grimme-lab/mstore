@@ -27,8 +27,11 @@ module mstore_polyalanine
    use mstore_data_record, only : record_type, new_record
    implicit none
    private
+
    public :: get_polyalanine_records
+
 contains
+
 subroutine get_polyalanine_records(records)
    type(record_type), allocatable, intent(out) :: records(:)
    records = [ &

@@ -16,7 +16,7 @@
 module mstore_heavy28
    use mctc_env_accuracy, only : wp
    use mctc_io_structure, only : structure_type, new
-   use mstore_data_record, only : record_type, new_record, select_record
+   use mstore_data_record, only : record_type, new_record
    implicit none
    private
 

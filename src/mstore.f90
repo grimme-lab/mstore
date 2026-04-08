@@ -21,16 +21,17 @@ module mstore
    use mstore_data_record, only : select_record
    use mstore_data_store, only : store_type, new_store
    use mstore_amino20x4, only : get_amino20x4_records
+   use mstore_amylose, only : get_amylose_records
    use mstore_but14diol, only : get_but14diol_records
+   use mstore_f_block, only : get_f_block_records
    use mstore_heavy28, only : get_heavy28_records
    use mstore_ice10, only : get_ice10_records
    use mstore_il16, only : get_il16_records
    use mstore_mb16_43, only : get_mb16_43_records
-   use mstore_upu23, only : get_upu23_records
-   use mstore_amylose, only : get_amylose_records
    use mstore_polyalanine, only : get_polyalanine_records
+   use mstore_rc21, only : get_rc21_records
+   use mstore_upu23, only : get_upu23_records
    use mstore_x23, only : get_x23_records
-   use mstore_f_block, only : get_f_block_records
    implicit none
    private
 
@@ -131,15 +132,16 @@ subroutine get_mstore_collections(collections)
 
    collections = [ &
       new_collection("Amino20x4", get_amino20x4_records), &
+      new_collection("AMYLOSE", get_amylose_records), &
       new_collection("But14diol", get_but14diol_records), &
       new_collection("f-block", get_f_block_records), &
       new_collection("Heavy28", get_heavy28_records), &
       new_collection("ICE10", get_ice10_records), &
       new_collection("IL16", get_il16_records), &
       new_collection("MB16-43", get_mb16_43_records), &
-      new_collection("UPU23", get_upu23_records), &
-      new_collection("AMYLOSE", get_amylose_records), &
       new_collection("POLYALANINE", get_polyalanine_records), &
+      new_collection("RC21", get_rc21_records), &
+      new_collection("UPU23", get_upu23_records), &
       new_collection("X23", get_x23_records) &
       ]
 

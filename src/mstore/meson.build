@@ -17,14 +17,15 @@ subdir('data')
 
 srcs += files(
   'amino20x4.f90',
+  'amylose.f90',
   'but14diol.f90',
   'f_block.f90',
   'heavy28.f90',
   'ice10.f90',
   'il16.f90',
   'mb16_43.f90',
-  'amylose.f90',
   'polyalanine.f90',
+  'rc21.f90',
   'upu23.f90',
   'x23.f90',
 )

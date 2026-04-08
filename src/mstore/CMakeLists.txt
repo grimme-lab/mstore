@@ -20,16 +20,17 @@ set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
 list(
   APPEND srcs
   "${dir}/amino20x4.f90"
+  "${dir}/amylose.f90"
   "${dir}/but14diol.f90"
   "${dir}/f_block.f90"
   "${dir}/heavy28.f90"
   "${dir}/ice10.f90"
   "${dir}/il16.f90"
   "${dir}/mb16_43.f90"
+  "${dir}/polyalanine.f90"
+  "${dir}/rc21.f90"
   "${dir}/upu23.f90"
   "${dir}/x23.f90"
-  "${dir}/amylose.f90"
-  "${dir}/polyalanine.f90"
 )
 
 set(srcs "${srcs}" PARENT_SCOPE)

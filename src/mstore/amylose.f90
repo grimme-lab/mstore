@@ -33,8 +33,11 @@ module mstore_amylose
    use mstore_data_record, only : record_type, new_record
    implicit none
    private
+
    public :: get_amylose_records
+
 contains
+
 subroutine get_amylose_records(records)
    type(record_type), allocatable, intent(out) :: records(:)
    records = [ &
