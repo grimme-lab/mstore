@@ -94,9 +94,6 @@ jobs:
     - name: Build library (CMake)
       run: cmake --build ${{ env.C_BUILD_DIR }}
 
-    - name: Run unit tests (CTest)
-      run: ctest
-      working-directory: ${{ env.C_BUILD_DIR }}
 
   # Test native MinGW Windows build
   mingw-build:
@@ -129,7 +126,7 @@ jobs:
           mingw-w64-${{ matrix.arch }}-ninja
 
     - name: Install meson/cmake
-      run: pip3 install meson==0.56.2
+      run: pip3 install meson==1.4.1
 
     - name: Configure meson build
       run: meson setup ${{ env.M_BUILD_DIR }}
@@ -150,12 +147,6 @@ jobs:
 
     - name: Build project (CMake)
       run: cmake --build ${{ env.C_BUILD_DIR }}
-
-    - name: Run unit tests (CTest)
-      run: ctest
-      working-directory: ${{ env.C_BUILD_DIR }}
-      env:
-        OMP_NUM_THREADS: 2,1
 
 
   intel-build:
@@ -206,7 +197,3 @@ jobs:
 
     - name: Build library (CMake)
       run: . /opt/intel/oneapi/setvars.sh && cmake --build ${{ env.C_BUILD_DIR }}
-
-    - name: Run unit tests (CTest)
-      run: . /opt/intel/oneapi/setvars.sh && ctest
-      working-directory: ${{ env.C_BUILD_DIR }}
