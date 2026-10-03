@@ -30,9 +30,12 @@ subroutine get_f_block_records(records)
    records = [ &
       new_record('LaCl3', LaCl3), &
       new_record('CeCl3', CeCl3), &
+      new_record('CeClH2', CeClH2), &
       new_record('CeF3', CeF3), &
+      new_record('CeFH2', CeFH2), &
       new_record('CeH4', CeH4), &
       new_record('PrCl3', PrCl3), &
+      new_record('NdClH2', NdClH2), &
       new_record('PmCl3', PmCl6), &
       new_record('SmCl3', SmCl3), &
       new_record('EuCl5', EuCl5), &
@@ -68,6 +71,7 @@ subroutine get_f_block_records(records)
       new_record('LrH6', LrH6), &
       new_record('La2', La2), &
       new_record('Ce2', Ce2), &
+      new_record('CePr', CePr), &
       new_record('Pr2', Pr2), &
       new_record('Gd2', Gd2), &
       new_record('U2', U2), &
@@ -108,6 +112,21 @@ subroutine CeCl3(self)
    call new(self, sym, xyz, uhf=uhf)
 end subroutine CeCl3
 
+subroutine CeClH2(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 4
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Ce", "Cl", "H", "H"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.34430551989507_wp,  0.48589111642113_wp, -0.63159177689118_wp, &
+      & -1.92346360186845_wp, -2.77880494449514_wp, -3.34258959032595_wp, &
+      & -1.37549021809236_wp,  3.84051527703012_wp,  0.62399365816101_wp, &
+      &  4.08185103614380_wp,  0.00554555561254_wp,  0.63540715841876_wp], &
+      & shape(xyz))
+   integer, parameter :: uhf = 1
+   call new(self, sym, xyz, uhf=uhf)
+end subroutine CeClH2
+
 subroutine CeF3(self)
    type(structure_type), intent(out) :: self
    integer, parameter :: nat = 4
@@ -122,6 +141,21 @@ subroutine CeF3(self)
    integer, parameter :: uhf = 1
    call new(self, sym, xyz, uhf=uhf)
 end subroutine CeF3
+
+subroutine CeFH2(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 4
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Ce", "F", "H", "H"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.31341148423089_wp,  0.43560267965472_wp, -0.60428852389396_wp, &
+      & -1.49105188001756_wp, -2.15235215616270_wp, -2.83632833381967_wp, &
+      & -1.78949221363931_wp,  3.69986435961838_wp,  0.35535720766027_wp, &
+      &  4.09433534550403_wp, -0.42996787854179_wp,  0.37047909941599_wp], &
+      & shape(xyz))
+   integer, parameter :: uhf = 1
+   call new(self, sym, xyz, uhf=uhf)
+end subroutine CeFH2
 
 subroutine CeH4(self)
    type(structure_type), intent(out) :: self
@@ -152,6 +186,21 @@ subroutine PrCl3(self)
    integer, parameter :: uhf = 2
    call new(self, sym, xyz, uhf=uhf)
 end subroutine PrCl3
+
+subroutine NdClH2(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 4
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Nd", "Cl", "H", "H"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.32811528108045_wp,  0.46209501419179_wp, -0.63182224217952_wp, &
+      & -1.93954972897673_wp, -2.80453922595282_wp, -3.36985481167178_wp, &
+      & -1.23933935586842_wp,  3.78267292232738_wp,  0.63895478754289_wp, &
+      &  3.97797653984277_wp,  0.11291829400230_wp,  0.64794171567104_wp], &
+      & shape(xyz))
+   integer, parameter :: uhf = 3
+   call new(self, sym, xyz, uhf=uhf)
+end subroutine NdClH2
 
 subroutine PmCl6(self)
    type(structure_type), intent(out) :: self
@@ -686,6 +735,19 @@ subroutine Ce2(self)
       & shape(xyz))
    call new(self, sym, xyz)
 end subroutine Ce2
+
+subroutine CePr(self)
+   type(structure_type), intent(out) :: self
+   integer, parameter :: nat = 2
+   character(len=*), parameter :: sym(nat) = [character(len=4)::&
+      & "Ce", "Pr"]
+   real(wp), parameter :: xyz(3, nat) = reshape([&
+      &  0.00000000000000_wp,  0.00000000000000_wp, -2.51350575170427_wp, &
+      &  0.00000000000000_wp,  0.00000000000000_wp,  2.51350575170427_wp],&
+      & shape(xyz))
+   integer, parameter :: uhf = 3
+   call new(self, sym, xyz)
+end subroutine CePr
 
 subroutine Pr2(self)
    type(structure_type), intent(out) :: self
