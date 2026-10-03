@@ -143,7 +143,7 @@ jobs:
         OMP_NUM_THREADS: 2,1
 
     - name: Configure cmake build
-      run: cmake -B ${{ env.C_BUILD_DIR }} -G Ninja
+      run: cmake -B ${{ env.C_BUILD_DIR }} -G Ninja -DMCTCLIB_WITH_OpenMP=OFF
 
     - name: Build project (CMake)
       run: cmake --build ${{ env.C_BUILD_DIR }}
