@@ -10,6 +10,7 @@ keywords = ["computational-chemistry", "testing"]
 [dependencies]
 [dependencies.mctc-lib]
 git = "https://github.com/grimme-lab/mctc-lib"
+tag = "v0.6.1"
 
 [[executable]]
 name = "mstore-fortranize"
